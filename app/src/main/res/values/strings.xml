@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MovieDB</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_1">Movies</string>
+    <string name="tab_2">TV Show</string>
+    <string name="poster">Poster</string>
+    <string name="directors">Directors:</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="genre">Genre</string>
+    <string name="dolar">$</string>
+    <string name="temp_storyline">"Adele is a Scottish heiress whose extremely wealthy family owns estates and grounds. When she was a teenager. "</string>
+</resources>
