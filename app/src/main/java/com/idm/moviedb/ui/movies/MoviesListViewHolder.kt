@@ -1,4 +1,4 @@
-package com.idm.moviedb.ui.home
+package com.idm.moviedb.ui.movies
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,7 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.databinding.ItemLayoutBinding
 import com.idm.moviedb.models.Movie
 
-class ListViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+class MoviesListViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(movie: Movie) {
         with(binding) {
             tvGenre.text = movie.genre
@@ -20,8 +20,6 @@ class ListViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.View
                 .placeholder(ColorDrawable(Color.GRAY))
                 .apply(RequestOptions().override(76, 76))
                 .into(ivPoster)
-
-
 
 
         }

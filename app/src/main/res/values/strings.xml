@@ -10,4 +10,8 @@
     <string name="genre">Genre</string>
     <string name="dolar">$</string>
     <string name="temp_storyline">"Adele is a Scottish heiress whose extremely wealthy family owns estates and grounds. When she was a teenager. "</string>
+    <string name="creator">Creator:</string>
+    <string name="story_line">Story Line</string>
+    <string name="budget">Budget</string>
+    <string name="detail_tv_show">Detail TV Show</string>
 </resources>

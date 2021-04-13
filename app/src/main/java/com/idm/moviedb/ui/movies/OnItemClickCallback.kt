@@ -1,4 +1,4 @@
-package com.idm.moviedb.ui.home
+package com.idm.moviedb.ui.movies
 
 import com.idm.moviedb.models.Movie
 

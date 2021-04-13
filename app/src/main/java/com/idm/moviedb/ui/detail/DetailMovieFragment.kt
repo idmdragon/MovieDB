@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.idm.moviedb.R
 
 
-class DetailFragment : Fragment() {
+class DetailMovieFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+        return inflater.inflate(R.layout.fragment_detail_movie, container, false)
     }
 
 }

@@ -24,13 +24,14 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val sectionsPagerAdapter = ViewPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabLayout)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+
+        with(binding){
+            viewPager.adapter = ViewPagerAdapter(this@HomeActivity)
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = resources.getString(TAB_TITLES[position])
+            }.attach()
+        }
+
 
 
 
