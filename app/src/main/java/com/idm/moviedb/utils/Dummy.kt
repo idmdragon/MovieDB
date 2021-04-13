@@ -96,9 +96,9 @@ object Dummy {
         )
         listMovie.add(
             Movie(
-                "How to Train Your Dragon: The Hidden World",
+                "How to Train Your Dragon",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
-                "Animation, Family, Adventure\n",
+                "Animation, Family, Adventure",
                 78,
                 "1h 44m",
                 "Dean DeBlois",
@@ -152,7 +152,7 @@ object Dummy {
             TVShow(
                 "Dragon Ball",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tZ0jXOeYBWPZ0OWzUhTlYvMF7YR.jpg",
-                "Animation, Action & Adventure, Sci-Fi & Fantasy\n",
+                "Animation, Action & Adventure",
                 81,
                 "25m",
                 "Akira Toriyama",
@@ -163,7 +163,7 @@ object Dummy {
             TVShow(
                 "Fairy Tail",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/jsYTctFnK8ewomnUgcwhmsTkOum.jpg",
-                "Action & Adventure, Animation, Comedy, Sci-Fi & Fantasy",
+                "Action & Adventure, Animation, Comedy",
                 78,
                 "25m",
                 "Hiro Mashima",
@@ -185,7 +185,7 @@ object Dummy {
             TVShow(
                 "Gotham",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
-                "Drama, Crime, Sci-Fi & Fantasy\n",
+                "Drama, Crime, Sci-Fi & Fantasy",
                 75,
                 "43m",
                 "Bruno Heller",
@@ -207,11 +207,11 @@ object Dummy {
             TVShow(
                 "Marvel's Iron Fist",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg",
-                "Action & Adventure, Drama, Sci-Fi & Fantasy\n",
+                "Action & Adventure, Drama, Sci-Fi & Fantasy",
                 66,
                 "55m",
                 "Scott Buck",
-                "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.\n"
+                "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny."
             )
         )
         listTvShow.add(
@@ -229,11 +229,11 @@ object Dummy {
             TVShow(
                 "Riverdale",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wRbjVBdDo5qHAEOVYoMWpM58FSA.jpg",
-                "Mystery, Drama, Crime\n",
+                "Mystery, Drama, Crime",
                 86,
                 "45m",
                 "Roberto Aguirre-Sacasa",
-                "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade.\n"
+                "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade."
             )
         )
         listTvShow.add(
@@ -244,7 +244,7 @@ object Dummy {
                 80,
                 "57m",
                 "Paul Abbott",
-                "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are.\n"
+                "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are."
             )
         )
         return listTvShow
