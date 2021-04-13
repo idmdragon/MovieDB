@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:paddingBottom="32dp"
-        tools:context=".ui.detail.DetailTVShowFragment">
+        tools:context=".ui.detail.tvshow.DetailTvShowActivity">
 
         <TextView
             android:id="@+id/tvborder"
@@ -36,7 +36,7 @@
             tools:text="Ilham Dwi M" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -52,28 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="94dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="96dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/detail_tv_show"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
-            app:layout_constraintStart_toEndOf="@+id/imageButton2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_save_border"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iv_poster"
             android:layout_width="match_parent"
             android:layout_height="370dp"
             android:layout_marginStart="32dp"
@@ -85,14 +72,14 @@
             tools:background="@color/blue" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_tittle"
             style="@style/Heading1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
             tools:text="Behind Her Eyes" />
 
         <TextView
@@ -102,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/creator"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintStart_toStartOf="@+id/tv_tittle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
 
         <TextView
             android:id="@+id/textView5"
@@ -137,7 +124,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tv_story_line"
             style="@style/Heading2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -150,7 +137,7 @@
             tools:text="@string/temp_storyline" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

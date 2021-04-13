@@ -22,8 +22,7 @@ class ListMovieAdapter(private val listItem: ArrayList<Movie>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: MoviesListViewHolder, position: Int) {
-        val movie = listItem[position]
-        holder.bind(movie)
+        holder.bind(listItem[position])
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listItem[holder.adapterPosition])
         }
