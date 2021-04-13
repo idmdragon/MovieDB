@@ -36,7 +36,8 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-        detailMovieViewModel._itemMovie.observe(this, ::bindData)
+        val movie : Movie = detailMovieViewModel.getItem()
+        bindData(movie)
 
     }
 

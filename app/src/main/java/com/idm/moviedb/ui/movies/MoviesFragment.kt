@@ -30,13 +30,12 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviesViewModel.setMovie()
 
 
         binding.rvMovies.layoutManager = LinearLayoutManager(activity)
         activity.apply {
-            moviesViewModel._listMovie.observe(viewLifecycleOwner) {
-                adapter = ListMovieAdapter(it)
+            val listMovie : ArrayList<Movie> = moviesViewModel.getMovie()
+                adapter = ListMovieAdapter(listMovie)
                 adapter.notifyDataSetChanged()
                 binding.rvMovies.adapter = adapter
                 adapter.setOnItemCallback(
@@ -51,5 +50,3 @@ class MoviesFragment : Fragment() {
             }
         }
     }
-
-}

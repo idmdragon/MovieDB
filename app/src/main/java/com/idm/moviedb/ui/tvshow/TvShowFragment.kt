@@ -30,13 +30,12 @@ class TvShowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvShowViewModel.setMovie()
 
 
         binding.rvTvshow.layoutManager = LinearLayoutManager(activity)
         activity.apply {
-            tvShowViewModel._listTVShow.observe(viewLifecycleOwner) {
-                adapter = ListTVShowAdapter(it)
+            val listTVShow : ArrayList<TVShow> = tvShowViewModel.getTVShow()
+                adapter = ListTVShowAdapter(listTVShow)
                 adapter.notifyDataSetChanged()
                 binding.rvTvshow.adapter = adapter
 
@@ -50,6 +49,5 @@ class TvShowFragment : Fragment() {
                     }
                 )
             }
-        }
     }
 }

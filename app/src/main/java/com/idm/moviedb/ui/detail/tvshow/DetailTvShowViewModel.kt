@@ -9,16 +9,19 @@ import com.idm.moviedb.utils.Dummy
 
 class DetailTvShowViewModel : ViewModel(){
 
-    private val itemTvShow = MutableLiveData<TVShow>()
-    val _itemTvShow : LiveData<TVShow> = itemTvShow
+    private lateinit var itemTvShow : TVShow
 
     fun setItem(title : String){
         val dummyData = Dummy.getTvShow()
         for(data in dummyData){
             if(data.title == title){
-                itemTvShow.postValue(data)
+                itemTvShow = data
             }
         }
+    }
+
+    fun getItem():TVShow{
+        return itemTvShow
     }
 
 }

@@ -35,8 +35,8 @@ class DetailTvShowActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-        detailTvShowViewModel._itemTvShow.observe(this,::bindData )
-
+        val tvShow : TVShow = detailTvShowViewModel.getItem()
+        bindData(tvShow)
     }
 
     private fun bindData(tvShow: TVShow?) {

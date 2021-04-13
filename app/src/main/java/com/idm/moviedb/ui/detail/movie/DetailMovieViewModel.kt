@@ -8,16 +8,20 @@ import com.idm.moviedb.utils.Dummy
 
 class DetailMovieViewModel : ViewModel(){
 
-    private val itemMovie = MutableLiveData<Movie>()
-    val _itemMovie : LiveData<Movie> = itemMovie
+    private lateinit var itemMovie : Movie
+
 
     fun setItem(title : String){
         val dummyData = Dummy.getMovie()
         for(data in dummyData){
             if(data.title == title){
-                itemMovie.postValue(data)
+                itemMovie = data
             }
         }
+    }
+
+    fun getItem():Movie{
+        return itemMovie
     }
 
 }

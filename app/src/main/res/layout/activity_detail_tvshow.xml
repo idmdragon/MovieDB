@@ -138,13 +138,14 @@
 
         <TextView
             android:id="@+id/tv_star"
+            style="@style/Heading2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            tools:text="100"
-            style="@style/Heading2"
+            app:layout_constraintBottom_toBottomOf="@+id/tvborder"
             app:layout_constraintStart_toEndOf="@+id/tvborder"
-            app:layout_constraintTop_toTopOf="@+id/tvborder" />
+            app:layout_constraintTop_toTopOf="@+id/tvborder"
+            tools:text="100" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

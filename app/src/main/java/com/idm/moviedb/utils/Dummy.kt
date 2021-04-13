@@ -145,7 +145,7 @@ object Dummy {
                 66,
                 "42m",
                 "Greg Berlanti",
-                ""
+                "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow."
             )
         )
         listTvShow.add(

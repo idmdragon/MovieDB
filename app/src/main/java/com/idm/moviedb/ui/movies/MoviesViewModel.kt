@@ -8,11 +8,7 @@ import com.idm.moviedb.models.TVShow
 import com.idm.moviedb.utils.Dummy
 
 class MoviesViewModel : ViewModel() {
-    private val listMovie = MutableLiveData<ArrayList<Movie>>()
-    val _listMovie : LiveData<ArrayList<Movie>> = listMovie
 
-    fun setMovie(){
-        listMovie.postValue(Dummy.getMovie())
-    }
+    fun getMovie()= Dummy.getMovie()
 
 }
