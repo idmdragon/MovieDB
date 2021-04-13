@@ -1,9 +1,7 @@
 package com.idm.moviedb.ui.detail.tvshow
 
-import com.idm.moviedb.ui.detail.movie.DetailMovieViewModel
 import com.idm.moviedb.utils.Dummy
 import org.junit.Test
-
 import org.junit.Assert.*
 import org.junit.Before
 

@@ -2,7 +2,6 @@ package com.idm.moviedb.ui.detail.movie
 
 import com.idm.moviedb.utils.Dummy
 import org.junit.Test
-
 import org.junit.Assert.*
 import org.junit.Before
 

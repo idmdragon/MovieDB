@@ -5,7 +5,7 @@ import org.junit.Before
 import org.junit.Test
 
 
-class TVShowViewModelTest (){
+class TVShowViewModelTest {
 
     private lateinit var viewModel: TVShowViewModel
 
