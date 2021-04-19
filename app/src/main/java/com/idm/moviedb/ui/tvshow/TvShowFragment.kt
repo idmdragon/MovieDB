@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.databinding.FragmentTvShowBinding
-import com.idm.moviedb.models.TVShow
+import com.idm.moviedb.data.source.remote.TVShow
 import com.idm.moviedb.ui.detail.tvshow.DetailTvShowActivity
 
 class TvShowFragment : Fragment() {

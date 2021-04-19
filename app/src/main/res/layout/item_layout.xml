@@ -14,10 +14,10 @@
         android:id="@+id/ivPoster"
         android:layout_width="76dp"
         android:layout_height="76dp"
+        android:contentDescription="@string/poster"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/poster" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -51,5 +51,37 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvGenre"
-        tools:text="1h 2m" />
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:text="@string/_10"
+        app:layout_constraintStart_toEndOf="@+id/tvHours"
+        app:layout_constraintTop_toBottomOf="@+id/tvGenre" />
+
+    <RatingBar
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        android:id="@+id/rating_bar"
+        style="@android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="40dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/white"
+        android:rating="3.3"
+        android:stepSize="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="@+id/ivPoster"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

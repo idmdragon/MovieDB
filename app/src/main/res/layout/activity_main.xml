@@ -17,32 +17,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        app:tabTextAppearance="@android:style/TextAppearance.Medium"
-        android:layout_marginEnd="32dp"
-        app:tabTextColor="@color/white"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorColor="@color/blue"
-        android:background="@drawable/tab_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:paddingBottom="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bot_nav"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:navGraph="@navigation/home_navigation" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bot_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_gravity="bottom"
+        android:background="@color/black"
+        app:itemIconTint="@color/item_color"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:menu="@menu/menu" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        app:tabTextAppearance="@android:style/TextAppearance.Medium"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:tabTextColor="@color/white"-->
+<!--        app:tabIndicatorFullWidth="false"-->
+<!--        app:tabIndicatorColor="@color/blue"-->
+<!--        android:background="@drawable/tab_bg"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        android:paddingBottom="8dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/view_pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

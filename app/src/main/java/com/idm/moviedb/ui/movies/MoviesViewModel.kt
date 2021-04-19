@@ -3,12 +3,20 @@ package com.idm.moviedb.ui.movies
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.idm.moviedb.models.Movie
-import com.idm.moviedb.models.TVShow
-import com.idm.moviedb.utils.Dummy
+import androidx.lifecycle.viewModelScope
+import com.idm.moviedb.data.source.remote.RetrofitInstance
+import com.idm.moviedb.data.source.remote.movie.MovieResult
+import com.idm.moviedb.utils.Constant.Companion.API_KEY
+import kotlinx.coroutines.launch
 
 class MoviesViewModel : ViewModel() {
 
-    fun getMovie()= Dummy.getMovie()
+    private val _listMoviePlayingNow = MutableLiveData<ArrayList<MovieResult>>()
+    val listMoviePlayingNow: LiveData<ArrayList<MovieResult>> = _listMoviePlayingNow
+    fun getMovie() = viewModelScope.launch {
+        RetrofitInstance.api.getNowPlaying(API_KEY).let {
+            _listMoviePlayingNow.postValue(it.body()?.results)
+        }
 
+    }
 }

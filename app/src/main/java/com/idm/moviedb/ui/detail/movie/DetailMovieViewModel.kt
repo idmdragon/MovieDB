@@ -1,14 +1,12 @@
 package com.idm.moviedb.ui.detail.movie
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.idm.moviedb.models.Movie
+import com.idm.moviedb.data.source.remote.movie.MovieDetail
 import com.idm.moviedb.utils.Dummy
 
 class DetailMovieViewModel : ViewModel(){
 
-    private lateinit var itemMovie : Movie
+    private lateinit var itemMovie : MovieDetail
 
 
     fun setItem(title : String){
@@ -20,7 +18,7 @@ class DetailMovieViewModel : ViewModel(){
         }
     }
 
-    fun getItem():Movie{
+    fun getItem(): MovieDetail {
         return itemMovie
     }
 

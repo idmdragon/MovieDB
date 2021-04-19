@@ -1,10 +1,7 @@
 package com.idm.moviedb.ui.detail.tvshow
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.idm.moviedb.models.Movie
-import com.idm.moviedb.models.TVShow
+import com.idm.moviedb.data.source.remote.TVShow
 import com.idm.moviedb.utils.Dummy
 
 class DetailTvShowViewModel : ViewModel(){
@@ -20,7 +17,7 @@ class DetailTvShowViewModel : ViewModel(){
         }
     }
 
-    fun getItem():TVShow{
+    fun getItem(): TVShow {
         return itemTvShow
     }
 

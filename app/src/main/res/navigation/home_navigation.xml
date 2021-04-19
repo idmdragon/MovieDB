@@ -2,4 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_navigation" />
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/movies">
+    <fragment
+        android:id="@+id/movies"
+        android:name="com.idm.moviedb.ui.movies.MoviesFragment"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies" />
+    <fragment
+        android:id="@+id/search"
+        android:name="com.idm.moviedb.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/tv"
+        android:name="com.idm.moviedb.ui.tvshow.TvShowFragment"
+        android:label="fragment_tv_show"
+        tools:layout="@layout/fragment_tv_show" />
+</navigation>

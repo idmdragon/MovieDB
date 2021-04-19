@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idm.moviedb.databinding.ItemLayoutBinding
-import com.idm.moviedb.models.TVShow
+import com.idm.moviedb.data.source.remote.TVShow
 import com.idm.moviedb.ui.tvshow.OnItemClickCallback
 import com.idm.moviedb.ui.tvshow.TVShowViewHolder
 

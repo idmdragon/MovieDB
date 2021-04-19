@@ -3,8 +3,12 @@ package com.idm.moviedb.ui.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.idm.moviedb.R
 import com.idm.moviedb.adapter.ViewPagerAdapter
@@ -24,16 +28,23 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpNavigation()
 
-        with(binding){
-            viewPager.adapter = ViewPagerAdapter(this@HomeActivity)
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = resources.getString(TAB_TITLES[position])
-            }.attach()
-        }
-
-
-
+//        with(binding){
+//            viewPager.adapter = ViewPagerAdapter(this@HomeActivity)
+//            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//                tab.text = resources.getString(TAB_TITLES[position])
+//            }.attach()
+//        }
 
     }
+
+    private fun setUpNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(binding.botNav,navController)
+    }
+
+
 }

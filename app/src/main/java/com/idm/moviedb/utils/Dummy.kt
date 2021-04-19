@@ -1,15 +1,15 @@
 package com.idm.moviedb.utils
 
-import com.idm.moviedb.models.Movie
-import com.idm.moviedb.models.TVShow
+import com.idm.moviedb.data.source.remote.movie.MovieDetail
+import com.idm.moviedb.data.source.remote.TVShow
 
 object Dummy {
 
-    fun getMovie(): ArrayList<Movie> {
-        val listMovie = ArrayList<Movie>()
+    fun getMovie(): ArrayList<MovieDetail> {
+        val listMovie = ArrayList<MovieDetail>()
 
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Alita: Battle Angel ",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
                 "Action, Science Fiction, Adventure",
@@ -22,7 +22,7 @@ object Dummy {
         )
 
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Aquaman",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg",
                 "Action, Adventure, Fantasy",
@@ -35,7 +35,7 @@ object Dummy {
         )
 
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "A Star Is Born",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
                 "Drama, Romance, Music",
@@ -47,7 +47,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Bohemian Rhapsody",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
                 "Music, Drama, History",
@@ -59,7 +59,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Cold Pursuit",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
                 "Action, Crime, Thriller",
@@ -71,7 +71,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Creed II",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
                 "Drama",
@@ -83,7 +83,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Glass",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
                 "Thriller, Drama, Science Fiction",
@@ -95,7 +95,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "How to Train Your Dragon",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
                 "Animation, Family, Adventure",
@@ -107,7 +107,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Avengers: Infinity War",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
                 "Adventure, Action, Science Fiction",
@@ -119,7 +119,7 @@ object Dummy {
             )
         )
         listMovie.add(
-            Movie(
+            MovieDetail(
                 "Mary Queen of Scots",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/b5RMzLAyq5QW6GtN9sIeAEMLlBI.jpg",
                 "Drama, History",

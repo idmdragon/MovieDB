@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
-import com.idm.moviedb.models.Movie
+import com.idm.moviedb.data.source.remote.movie.MovieDetail
 import java.text.NumberFormat
 import java.util.*
 
@@ -36,12 +36,12 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-        val movie : Movie = detailMovieViewModel.getItem()
+        val movie : MovieDetail = detailMovieViewModel.getItem()
         bindData(movie)
 
     }
 
-    private fun bindData(movie: Movie?) {
+    private fun bindData(movie: MovieDetail?) {
         with(binding) {
             if (movie != null) {
                 tvTittle.text = movie.title

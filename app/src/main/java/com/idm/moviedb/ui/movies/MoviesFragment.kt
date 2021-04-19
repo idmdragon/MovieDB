@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.ListMovieAdapter
 import com.idm.moviedb.databinding.FragmentMoviesBinding
-import com.idm.moviedb.models.Movie
+import com.idm.moviedb.data.source.remote.movie.MovieResult
 import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
 
 class MoviesFragment : Fragment() {
@@ -30,23 +30,26 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        binding.rvMovies.layoutManager = LinearLayoutManager(activity)
+        moviesViewModel.getMovie()
+//        binding.rvMovies.layoutManager = LinearLayoutManager(activity)
         activity.apply {
-            val listMovie : ArrayList<Movie> = moviesViewModel.getMovie()
-                adapter = ListMovieAdapter(listMovie)
-                adapter.notifyDataSetChanged()
-                binding.rvMovies.adapter = adapter
-                adapter.setOnItemCallback(
-                    object : OnItemClickCallback {
-                        override fun onItemClicked(movie: Movie) {
-                            val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-                            intent.putExtra(DetailMovieActivity.MOVIE_TITLE, movie.title)
-                            startActivity(intent)
-                        }
-                    }
-                )
-            }
+
+//            moviesViewModel.listMoviePlayingNow.observe(viewLifecycleOwner) {
+//                adapter = ListMovieAdapter(it)
+//                adapter.notifyDataSetChanged()
+//                binding.rvMovies.adapter = adapter
+//                adapter.setOnItemCallback(
+//                    object : OnItemClickCallback {
+//                        override fun onItemClicked(movie: MovieResult) {
+//                            val intent = Intent(requireContext(), DetailMovieActivity::class.java)
+//                            intent.putExtra(DetailMovieActivity.MOVIE_TITLE, movie.title)
+//                            startActivity(intent)
+//                        }
+//                    }
+//                )
+//            }
+
+
         }
     }
+}

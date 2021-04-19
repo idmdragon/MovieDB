@@ -23,7 +23,6 @@ class HomeActivityTest(){
     private val dummyTvShow = Dummy.getTvShow()
     @Before
     fun set(){
-
         ActivityScenario.launch(HomeActivity::class.java)
     }
 
@@ -112,6 +111,12 @@ class HomeActivityTest(){
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(withId(R.id.tv_story_line))
             .check(ViewAssertions.matches(withText(dummyTvShow[0].storyLine)))
+        //Convert Value of Star
+        val star = dummyTvShow[0].star.toDouble().div(10)
+        Espresso.onView(withId(R.id.tv_star))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(withId(R.id.tv_star))
+            .check(ViewAssertions.matches(withText(star.toString())))
 
     }
 

@@ -9,7 +9,7 @@ import com.idm.moviedb.ui.home.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     companion object{
-        const val TIME_SPLASH : Long = 2000;
+        const val TIME_SPLASH : Long = 1000;
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
