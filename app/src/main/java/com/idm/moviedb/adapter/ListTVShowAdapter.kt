@@ -30,5 +30,4 @@ class ListTVShowAdapter(private val listItem: ArrayList<TVShow>) : RecyclerView.
         }
     }
 
-
 }
