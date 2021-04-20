@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_marginBottom="24dp"
     tools:background="@color/black"
     android:layout_marginEnd="16dp"
@@ -19,14 +19,18 @@
 
     <TextView
         android:id="@+id/tv_tittle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="8dp"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintLeft_toRightOf="@id/iv_poster"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
         app:layout_constraintTop_toTopOf="@id/iv_poster"
         tools:text="Behind Her Eyes" />
     <TextView
@@ -41,16 +45,23 @@
         app:layout_constraintTop_toBottomOf="@id/tv_tittle"
         tools:text="August 7, 2020" />
 
-    <TextView
-        android:id="@+id/tv_type"
+    <RatingBar
+        android:id="@+id/rating_bar"
+        style="@android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/graytext"
-        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/white"
+        android:rating="3.3"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:stepSize="0.1"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_date"
-        app:layout_constraintTop_toBottomOf="@+id/tv_date"
-        tools:text="Movie"
-        android:drawablePadding="5dp"
-        app:drawableStartCompat="@drawable/ic_type" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 </androidx.constraintlayout.widget.ConstraintLayout>

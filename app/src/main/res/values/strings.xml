@@ -15,4 +15,10 @@
     <string name="budget">Budget</string>
     <string name="detail_tv_show">Detail TV Show</string>
     <string name="_10">/10</string>
+    <string name="search_your_movie_now">Type Movie Title</string>
+    <string name="find">Find your Favorite Now </string>
+    <string name="popular_movie">Popular Movie</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="tv_popular">TV Popular</string>
 </resources>

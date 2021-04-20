@@ -2,23 +2,21 @@ package com.idm.moviedb.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.adapter.ListMovieAdapter
-import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.adapter.SearchAdapter
 import com.idm.moviedb.data.source.remote.TVShow
 import com.idm.moviedb.data.source.remote.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
 import com.idm.moviedb.ui.detail.tvshow.DetailTvShowActivity
-import com.idm.moviedb.ui.tvshow.OnItemClickCallback
+import com.idm.moviedb.ui.search.OnItemClickCallback
 
 
 class SearchFragment : Fragment() {
@@ -31,7 +29,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
@@ -47,6 +45,7 @@ class SearchFragment : Fragment() {
                     shimmerLoading(false)
                 } else {
                     shimmerLoading(true)
+                    searchIlus(false)
                     searchViewModel.searchItem(query)
                 }
                 return true
@@ -68,35 +67,37 @@ class SearchFragment : Fragment() {
 
     private fun showRv(listSearch: ArrayList<SearchResult>?) {
         activity.apply {
-
+            val sizeResult = "Search Result(${listSearch?.size})"
+            binding.tvResult.text = sizeResult
             if (listSearch != null) {
                 with(binding) {
                     shimmerLoading(false)
-                }
-                binding.rvSearch.visibility = View.VISIBLE
-
-                binding.rvSearch.layoutManager = LinearLayoutManager(activity)
+                    searchIlus(false)
+                rvSearch.visibility = View.VISIBLE
+                rvSearch.layoutManager = LinearLayoutManager(activity)
                 adapter = SearchAdapter(listSearch)
-                binding.rvSearch.adapter = adapter
+                rvSearch.adapter = adapter
+                }
                 adapter.notifyDataSetChanged()
 
-            }
-
-//                adapter.setOnItemCallback(
-//                    object : OnItemClickCallback {
-//                        override fun onItemClicked(tvShow: TVShow) {
+                adapter.setOnItemCallback(
+                    object : OnItemClickCallback {
+                        override fun onItemClicked(result: SearchResult) {
+                            Toast.makeText(requireContext(),"title ${result.title}",Toast.LENGTH_LONG).show()
 //                            val intent = Intent(requireContext(), DetailTvShowActivity::class.java)
 //                            intent.putExtra(DetailTvShowActivity.SHOW_TITLE, tvShow.title)
 //                            startActivity(intent)
-//                        }
-//                    }
-//                )
+                        }
+                    }
+                )
+            }
+
         }
 
     }
 
     private fun shimmerLoading(status : Boolean){
-        if(status == true){
+        if(status){
             binding.shimmerFrameLayout.showShimmer(true)
             binding.shimmerFrameLayout.visibility = View.VISIBLE
         }else{
@@ -104,5 +105,8 @@ class SearchFragment : Fragment() {
             binding.shimmerFrameLayout.visibility = View.GONE
         }
 
+    }
+    private fun searchIlus(status : Boolean){
+            binding.searchIlu.isVisible = status
     }
 }

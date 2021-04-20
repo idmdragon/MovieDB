@@ -1,8 +1,9 @@
 package com.idm.moviedb.ui.tvshow
 
 import com.idm.moviedb.data.source.remote.TVShow
+import com.idm.moviedb.data.source.remote.tv.TvResult
 
 
 interface OnItemClickCallback {
-    fun onItemClicked(tvShow: TVShow)
+    fun onItemClicked(tvShow: TvResult)
 }

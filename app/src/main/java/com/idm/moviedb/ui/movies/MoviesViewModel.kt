@@ -11,12 +11,25 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel : ViewModel() {
 
-    private val _listMoviePlayingNow = MutableLiveData<ArrayList<MovieResult>>()
-    val listMoviePlayingNow: LiveData<ArrayList<MovieResult>> = _listMoviePlayingNow
-    fun getMovie() = viewModelScope.launch {
+    private val _listTopRated = MutableLiveData<ArrayList<MovieResult>>()
+    val listTopRated: LiveData<ArrayList<MovieResult>> = _listTopRated
+
+    fun getTopRated() = viewModelScope.launch {
+        RetrofitInstance.api.getTopRated(API_KEY).let {
+            _listTopRated.postValue(it.body()?.results)
+        }
+    }
+
+    private val _listPlayingNow = MutableLiveData<ArrayList<MovieResult>>()
+    val listPlayingNow: LiveData<ArrayList<MovieResult>> = _listPlayingNow
+
+    fun getNowPlaying() = viewModelScope.launch {
         RetrofitInstance.api.getNowPlaying(API_KEY).let {
-            _listMoviePlayingNow.postValue(it.body()?.results)
+            _listPlayingNow.postValue(it.body()?.results)
         }
 
     }
+
+
+
 }

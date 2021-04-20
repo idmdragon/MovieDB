@@ -3,7 +3,6 @@ package com.idm.moviedb.ui.home
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -28,9 +27,9 @@ class HomeActivityTest(){
 
     @Test
     fun loadMovie() {
-        Espresso.onView(withId(R.id.rv_movies))
+        Espresso.onView(withId(R.id.rv_top))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(withId(R.id.rv_movies))
+        Espresso.onView(withId(R.id.rv_top))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size))
         Espresso.onView(withId(R.id.rv_tvshow)).check(ViewAssertions.doesNotExist())
     }
@@ -42,12 +41,12 @@ class HomeActivityTest(){
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(withId(R.id.rv_tvshow))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShow.size))
-        Espresso.onView(withId(R.id.rv_movies)).check(ViewAssertions.doesNotExist())
+        Espresso.onView(withId(R.id.rv_top)).check(ViewAssertions.doesNotExist())
     }
 
     @Test
     fun loadDetailMovie() {
-        Espresso.onView(withId(R.id.rv_movies)).perform(
+        Espresso.onView(withId(R.id.rv_top)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 click()
             ))

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.databinding.FragmentTvShowBinding
 import com.idm.moviedb.data.source.remote.TVShow
+import com.idm.moviedb.data.source.remote.tv.TvResult
 import com.idm.moviedb.ui.detail.tvshow.DetailTvShowActivity
 
 class TvShowFragment : Fragment() {
@@ -31,23 +32,28 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.rvTvshow.layoutManager = LinearLayoutManager(activity)
+        tvShowViewModel.getTopRated()
+        binding.rvTvshow.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         activity.apply {
-            val listTVShow : ArrayList<TVShow> = tvShowViewModel.getTVShow()
-                adapter = ListTVShowAdapter(listTVShow)
+            tvShowViewModel.listTvPopular.observe(viewLifecycleOwner) {
+                adapter = ListTVShowAdapter(it)
                 adapter.notifyDataSetChanged()
+                binding.shimmerTopTV.stopShimmer()
+                binding.shimmerTopTV.visibility = View.GONE
                 binding.rvTvshow.adapter = adapter
 
                 adapter.setOnItemCallback(
                     object : OnItemClickCallback {
-                        override fun onItemClicked(tvShow: TVShow) {
+                        override fun onItemClicked(tvShow: TvResult) {
                             val intent = Intent(requireContext(), DetailTvShowActivity::class.java)
-                            intent.putExtra(DetailTvShowActivity.SHOW_TITLE, tvShow.title)
+                            intent.putExtra(DetailTvShowActivity.SHOW_TITLE, tvShow.name)
                             startActivity(intent)
                         }
                     }
                 )
             }
+
+        }
     }
 }
