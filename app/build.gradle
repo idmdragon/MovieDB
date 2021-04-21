@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -85,4 +86,20 @@ dependencies {
     //Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
+    //Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // For instrumentation tests
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.34.1-beta'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.34.1-beta'
+
+    // For local unit tests
+    testImplementation 'com.google.dagger:hilt-android-testing:2.34.1-beta'
+    kaptTest 'com.google.dagger:hilt-compiler:2.34.1-beta'
+
+}
+kapt {
+    correctErrorTypes true
 }

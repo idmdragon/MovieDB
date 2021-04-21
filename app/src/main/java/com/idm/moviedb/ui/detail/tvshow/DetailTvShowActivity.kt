@@ -11,9 +11,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
 import com.idm.moviedb.data.source.remote.tv.detail.TvDetailResponse
 import com.idm.moviedb.utils.Constant
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class DetailTvShowActivity : AppCompatActivity() {
     companion object {
         const val TV_ID = "tv_id"

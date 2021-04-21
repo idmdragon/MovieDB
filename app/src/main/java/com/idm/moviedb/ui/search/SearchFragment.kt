@@ -14,8 +14,9 @@ import com.idm.moviedb.adapter.SearchAdapter
 import com.idm.moviedb.data.source.remote.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
 import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
@@ -55,11 +56,8 @@ class SearchFragment : Fragment() {
         })
 
 
-
         activity.apply {
             searchViewModel.searchItemList.observe(viewLifecycleOwner, ::showRv)
-
-
         }
     }
 

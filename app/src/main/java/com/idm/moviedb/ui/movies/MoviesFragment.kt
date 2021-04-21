@@ -14,7 +14,9 @@ import com.idm.moviedb.adapter.ListVerticalMovieAdapter
 import com.idm.moviedb.data.source.remote.movie.MovieResult
 import com.idm.moviedb.databinding.FragmentMoviesBinding
 import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoviesFragment : Fragment() {
 
     private val moviesViewModel: MoviesViewModel by activityViewModels()

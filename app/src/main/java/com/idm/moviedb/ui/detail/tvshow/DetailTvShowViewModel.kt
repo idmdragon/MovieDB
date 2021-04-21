@@ -4,19 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.idm.moviedb.data.source.remote.RetrofitInstance
+import com.idm.moviedb.data.source.MainRepository
 import com.idm.moviedb.data.source.remote.tv.detail.TvDetailResponse
 import com.idm.moviedb.utils.Constant
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailTvShowViewModel : ViewModel(){
+class DetailTvShowViewModel @Inject constructor(
+    private val repository: MainRepository
+) : ViewModel() {
 
     private val _detailTv = MutableLiveData<TvDetailResponse>()
     val detailMovie: LiveData<TvDetailResponse> = _detailTv
 
 
     fun setDetail(id : Int) = viewModelScope.launch {
-        RetrofitInstance.api.getDetailTv(id, Constant.API_KEY).let {
+        repository.getDetailTv(id).let {
             _detailTv.postValue(it.body())
         }
     }

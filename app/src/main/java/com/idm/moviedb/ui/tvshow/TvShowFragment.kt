@@ -12,7 +12,9 @@ import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.databinding.FragmentTvShowBinding
 import com.idm.moviedb.data.source.remote.tv.TvResult
 import com.idm.moviedb.ui.detail.tvshow.DetailTvShowActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TvShowFragment : Fragment() {
 
     private val tvShowViewModel: TVShowViewModel by activityViewModels()

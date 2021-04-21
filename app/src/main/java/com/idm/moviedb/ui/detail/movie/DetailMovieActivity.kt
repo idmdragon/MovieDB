@@ -11,10 +11,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
 import com.idm.moviedb.data.source.remote.movie.detail.MovieDetailResponse
 import com.idm.moviedb.utils.Constant
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.*
 
-
+@AndroidEntryPoint
 class DetailMovieActivity : AppCompatActivity() {
     companion object {
         const val MOVIE_ID = "movie_id"
@@ -43,11 +44,11 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun bindData(movie: MovieDetailResponse) {
         with(binding) {
             tvTittle.text = movie.title
-            val taglineNotFound = "Tagline Not Found"
-            val tagline = if (movie.tagline!=""){
+
+            val tagline = if (movie.tagline.isEmpty()){
                 movie.tagline
             }else{
-                taglineNotFound
+               "Tagline Not Found"
             }
             tvTagline.text = tagline
             tvStatus.text = movie.status
