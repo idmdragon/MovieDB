@@ -9,14 +9,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
-import com.idm.moviedb.data.source.remote.movie.MovieDetail
+import com.idm.moviedb.data.source.remote.movie.detail.MovieDetailResponse
+import com.idm.moviedb.utils.Constant
 import java.text.NumberFormat
 import java.util.*
 
 
 class DetailMovieActivity : AppCompatActivity() {
     companion object {
-        const val MOVIE_TITLE = "movie_title"
+        const val MOVIE_ID = "movie_id"
     }
 
     private lateinit var binding: ActivityDetailMovieBinding
@@ -27,42 +28,54 @@ class DetailMovieActivity : AppCompatActivity() {
         binding = ActivityDetailMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val title = intent.getStringExtra(MOVIE_TITLE)
+        val movieID = intent.getIntExtra(MOVIE_ID,0)
 
-        if (title != null) {
-            detailMovieViewModel.setItem(title)
-        }
+        detailMovieViewModel.setDetail(movieID)
 
         binding.btnBack.setOnClickListener {
             finish()
         }
-        val movie : MovieDetail = detailMovieViewModel.getItem()
-        bindData(movie)
+
+        detailMovieViewModel.detailMovie.observe(this,::bindData)
 
     }
 
-    private fun bindData(movie: MovieDetail?) {
+    private fun bindData(movie: MovieDetailResponse) {
         with(binding) {
-            if (movie != null) {
-                tvTittle.text = movie.title
-                tvDirector.text = movie.directors
-                tvGenre.text = movie.genre
-                tvStoryLine.text = movie.storyLine
-
-                val budget = movie.budget
-                val convertBudget = NumberFormat.getNumberInstance(Locale.US).format(budget)
-                tvBudget.text = convertBudget
-
-                val star = movie.star.toDouble().div(10)
-                tvStar.text = star.toString()
-                Glide.with(this@DetailMovieActivity)
-                    .load(movie.poster)
-                    .transform(CenterCrop(), RoundedCorners(16))
-                    .placeholder(ColorDrawable(Color.GRAY))
-                    .into(ivPoster)
-
-
+            tvTittle.text = movie.title
+            val taglineNotFound = "Tagline Not Found"
+            val tagline = if (movie.tagline!=""){
+                movie.tagline
+            }else{
+                taglineNotFound
             }
+            tvTagline.text = tagline
+            tvStatus.text = movie.status
+
+             val listGenre  = movie.genres.map {
+                 it.name
+             }
+
+            tvGenre.text = listGenre.joinToString()
+            tvStoryLine.text = movie.overview
+
+            val budget = movie.budget
+            val convertBudget = NumberFormat.getNumberInstance(Locale.US).format(budget)
+            tvBudget.text = convertBudget
+
+            val revenue = movie.revenue
+            val convertRevenue = NumberFormat.getNumberInstance(Locale.US).format(revenue)
+            tvRevenue.text = convertRevenue
+
+            val star = movie.vote_average
+            tvStar.text = star.toString()
+            Glide.with(this@DetailMovieActivity)
+                .load(Constant.IMAGE_PATH +movie.poster_path)
+                .transform(CenterCrop(), RoundedCorners(16))
+                .placeholder(ColorDrawable(Color.GRAY))
+                .into(ivPoster)
+
+
         }
     }
 }

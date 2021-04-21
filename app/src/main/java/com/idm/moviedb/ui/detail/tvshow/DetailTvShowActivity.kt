@@ -3,20 +3,20 @@ package com.idm.moviedb.ui.detail.tvshow
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
-import com.idm.moviedb.data.source.remote.TVShow
+import com.idm.moviedb.data.source.remote.tv.detail.TvDetailResponse
+import com.idm.moviedb.utils.Constant
 import java.util.*
 
 
 class DetailTvShowActivity : AppCompatActivity() {
     companion object {
-        const val SHOW_TITLE = "show_title"
+        const val TV_ID = "tv_id"
     }
 
     private lateinit var binding: ActivityDetailTvshowBinding
@@ -27,38 +27,44 @@ class DetailTvShowActivity : AppCompatActivity() {
         binding = ActivityDetailTvshowBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val title = intent.getStringExtra(SHOW_TITLE)
-        if (title != null) {
-            detailTvShowViewModel.setItem(title)
-        }
+        val tvId = intent.getIntExtra(TV_ID, 0)
+        detailTvShowViewModel.setDetail(tvId)
 
         binding.btnBack.setOnClickListener {
             finish()
         }
-        val tvShow : TVShow = detailTvShowViewModel.getItem()
-        bindData(tvShow)
+        detailTvShowViewModel.detailMovie.observe(this,::bindData)
+
     }
 
-    private fun bindData(tvShow: TVShow?) {
+    private fun bindData(tvShow: TvDetailResponse) {
         with(binding) {
-            if (tvShow != null) {
-                Log.d("DETAILTV","isi tv show $tvShow")
-                tvTittle.text = tvShow.title
-                tvDirector.text = tvShow.creator
-                tvGenre.text = tvShow.genre
-                tvStoryLine.text = tvShow.storyLine
-
-                val star = tvShow.star.toDouble().div(10)
-                tvStar.text = star.toString()
-
-                Glide.with(this@DetailTvShowActivity)
-                    .load(tvShow.poster)
-                    .transform(CenterCrop(), RoundedCorners(16))
-                    .placeholder(ColorDrawable(Color.GRAY))
-                    .into(ivPoster)
-
-
+            val taglineNotFound = "Tagline Not Found"
+            val tagline = if (tvShow.tagline!=""){
+                tvShow.tagline
+            }else{
+                taglineNotFound
             }
+            tvTagline.text = tagline
+            tvStatus.text = tvShow.status
+            tvTittle.text = tvShow.name
+
+            val listGenre  = tvShow.genres.map {
+                it.name
+            }
+
+            tvGenre.text = listGenre.joinToString()
+            tvStoryLine.text = tvShow.overview
+            tvEpisodes.text = tvShow.number_of_episodes.toString()
+            tvStar.text = tvShow.vote_average.toString()
+
+            Glide.with(this@DetailTvShowActivity)
+                .load(Constant.IMAGE_PATH +tvShow.poster_path)
+                .transform(CenterCrop(), RoundedCorners(16))
+                .placeholder(ColorDrawable(Color.GRAY))
+                .into(ivPoster)
+
+
         }
     }
 

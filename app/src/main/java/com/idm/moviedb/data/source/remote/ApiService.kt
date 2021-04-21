@@ -1,10 +1,13 @@
 package com.idm.moviedb.data.source.remote
 
 import com.idm.moviedb.data.source.remote.movie.MovieResponse
+import com.idm.moviedb.data.source.remote.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.source.remote.search.SearchResponse
 import com.idm.moviedb.data.source.remote.tv.TvResponse
+import com.idm.moviedb.data.source.remote.tv.detail.TvDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -32,6 +35,21 @@ interface ApiService {
     suspend fun getTvPopular(
         @Query("api_key")
         api_key: String,
-
     ): Response<TvResponse>
+
+    @GET("/3/movie/{movie_id}")
+    suspend fun getDetailMovie(
+        @Path("movie_id")
+        movie_id: Int,
+        @Query("api_key")
+        api_key: String,
+    ): Response<MovieDetailResponse>
+
+    @GET("/3/tv/{tv_id}")
+    suspend fun getDetailTv(
+        @Path("tv_id")
+        tv_id: Int,
+        @Query("api_key")
+        api_key: String,
+    ): Response<TvDetailResponse>
 }

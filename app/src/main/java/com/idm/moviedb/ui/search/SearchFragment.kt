@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.SearchAdapter
-import com.idm.moviedb.data.source.remote.TVShow
 import com.idm.moviedb.data.source.remote.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
-import com.idm.moviedb.ui.detail.tvshow.DetailTvShowActivity
-import com.idm.moviedb.ui.search.OnItemClickCallback
+import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
 
 
 class SearchFragment : Fragment() {
@@ -31,7 +28,6 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -45,8 +41,10 @@ class SearchFragment : Fragment() {
                     shimmerLoading(false)
                 } else {
                     shimmerLoading(true)
+                    binding.tvResult.visibility = View.GONE
                     searchIlus(false)
                     searchViewModel.searchItem(query)
+                    binding.searchNotfound.visibility = View.GONE
                 }
                 return true
             }
@@ -68,25 +66,32 @@ class SearchFragment : Fragment() {
     private fun showRv(listSearch: ArrayList<SearchResult>?) {
         activity.apply {
             val sizeResult = "Search Result(${listSearch?.size})"
+            if (listSearch?.size==0){
+                binding.searchNotfound.visibility = View.VISIBLE
+            }else{
+                binding.searchNotfound.visibility = View.GONE
+            }
             binding.tvResult.text = sizeResult
             if (listSearch != null) {
                 with(binding) {
                     shimmerLoading(false)
                     searchIlus(false)
-                rvSearch.visibility = View.VISIBLE
-                rvSearch.layoutManager = LinearLayoutManager(activity)
-                adapter = SearchAdapter(listSearch)
-                rvSearch.adapter = adapter
+
+                    rvSearch.visibility = View.VISIBLE
+                    binding.tvResult.visibility = View.VISIBLE
+                    rvSearch.layoutManager = LinearLayoutManager(activity)
+
+                    adapter = SearchAdapter(listSearch)
+                    rvSearch.adapter = adapter
                 }
                 adapter.notifyDataSetChanged()
 
                 adapter.setOnItemCallback(
                     object : OnItemClickCallback {
                         override fun onItemClicked(result: SearchResult) {
-                            Toast.makeText(requireContext(),"title ${result.title}",Toast.LENGTH_LONG).show()
-//                            val intent = Intent(requireContext(), DetailTvShowActivity::class.java)
-//                            intent.putExtra(DetailTvShowActivity.SHOW_TITLE, tvShow.title)
-//                            startActivity(intent)
+                            val intent = Intent(requireContext(), DetailMovieActivity::class.java)
+                            intent.putExtra(DetailMovieActivity.MOVIE_ID, result.id)
+                            startActivity(intent)
                         }
                     }
                 )
@@ -96,17 +101,22 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun shimmerLoading(status : Boolean){
-        if(status){
+    private fun shimmerLoading(status: Boolean) {
+        if (status) {
             binding.shimmerFrameLayout.showShimmer(true)
             binding.shimmerFrameLayout.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.shimmerFrameLayout.stopShimmer()
             binding.shimmerFrameLayout.visibility = View.GONE
         }
 
     }
-    private fun searchIlus(status : Boolean){
-            binding.searchIlu.isVisible = status
+
+    private fun searchIlus(status: Boolean) {
+        binding.searchIlu.isVisible = status
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

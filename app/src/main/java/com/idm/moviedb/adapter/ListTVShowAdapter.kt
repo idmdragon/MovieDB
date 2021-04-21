@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idm.moviedb.data.source.remote.tv.TvResult
-import com.idm.moviedb.databinding.HorizontalItemBinding
 import com.idm.moviedb.databinding.VerticalItemBinding
 import com.idm.moviedb.ui.tvshow.OnItemClickCallback
 import com.idm.moviedb.ui.tvshow.TVShowViewHolder

@@ -11,29 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
+
         android:paddingBottom="32dp"
         tools:context=".ui.detail.tvshow.DetailTvShowActivity">
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/Heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/status"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            tools:text="Released" />
 
         <TextView
             android:id="@+id/tvborder"
             style="@style/Heading2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:text="| "
-            app:layout_constraintStart_toEndOf="@+id/tvDirector"
-            app:layout_constraintTop_toTopOf="@+id/tvDirector"
-            app:drawableEndCompat="@drawable/ic_star" />
-
-        <TextView
-            android:id="@+id/tvDirector"
-            style="@style/Heading2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            tools:text="Ilham Dwi M" />
+            android:layout_marginTop="4dp"
+            android:text=""
+            app:drawableEndCompat="@drawable/ic_star"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -50,13 +51,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="94dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/detail_tv_show"
             android:textColor="@color/white"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_poster"
             app:layout_constraintStart_toEndOf="@+id/btn_back"
+            app:layout_constraintStart_toStartOf="@+id/iv_poster"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -74,23 +76,37 @@
         <TextView
             android:id="@+id/tv_tittle"
             style="@style/Heading1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_poster"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/iv_poster"
             app:layout_constraintTop_toBottomOf="@+id/iv_poster"
             tools:text="Behind Her Eyes" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_tagline"
             style="@style/Heading2"
+            android:layout_width="0dp"            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_tittle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tittle"
+            tools:text="Tagline Film" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/Heading1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/creator"
-            app:layout_constraintStart_toStartOf="@+id/tv_tittle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
+            android:layout_marginTop="12dp"
+            android:text="@string/status"
+            app:layout_constraintStart_toStartOf="@+id/tvborder"
+            app:layout_constraintTop_toBottomOf="@+id/tvborder" />
 
         <TextView
             android:id="@+id/textView5"
@@ -99,19 +115,51 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/genre"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/tv_status"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
         <TextView
             android:id="@+id/tv_genre"
             style="@style/Heading2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="43dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:text="Horror, Action, Thriller" />
 
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/Heading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/total_episode"
+            app:layout_constraintStart_toStartOf="@+id/tv_genre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+
+        <TextView
+            android:id="@+id/tvEpisodes"
+            style="@style/Heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/Heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/episodes"
+            app:layout_constraintStart_toEndOf="@+id/tvEpisodes"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
             android:id="@+id/textView10"
@@ -120,8 +168,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/story_line"
-            app:layout_constraintStart_toStartOf="@+id/tv_genre"
-            app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <TextView
             android:id="@+id/tv_story_line"
@@ -130,7 +178,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="43dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
@@ -142,10 +189,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvborder"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvborder"
             app:layout_constraintTop_toTopOf="@+id/tvborder"
             tools:text="100" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/Heading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/vote_avarage"
+            app:layout_constraintStart_toStartOf="@+id/tv_tagline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tagline" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

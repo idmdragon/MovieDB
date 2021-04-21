@@ -3,15 +3,9 @@ package com.idm.moviedb.ui.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import com.idm.moviedb.R
-import com.idm.moviedb.adapter.ViewPagerAdapter
 import com.idm.moviedb.databinding.ActivityMainBinding
 
 class HomeActivity : AppCompatActivity() {

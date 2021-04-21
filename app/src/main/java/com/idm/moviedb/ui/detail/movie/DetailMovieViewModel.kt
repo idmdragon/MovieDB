@@ -1,25 +1,25 @@
 package com.idm.moviedb.ui.detail.movie
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.idm.moviedb.data.source.remote.movie.MovieDetail
-import com.idm.moviedb.utils.Dummy
+import androidx.lifecycle.viewModelScope
+import com.idm.moviedb.data.source.remote.RetrofitInstance
+import com.idm.moviedb.data.source.remote.movie.detail.MovieDetailResponse
+import com.idm.moviedb.utils.Constant.Companion.API_KEY
+import kotlinx.coroutines.launch
 
 class DetailMovieViewModel : ViewModel(){
 
-    private lateinit var itemMovie : MovieDetail
+    private val _detailMovie = MutableLiveData<MovieDetailResponse>()
+    val detailMovie: LiveData<MovieDetailResponse> = _detailMovie
 
 
-    fun setItem(title : String){
-        val dummyData = Dummy.getMovie()
-        for(data in dummyData){
-            if(data.title == title){
-                itemMovie = data
-            }
+    fun setDetail(id : Int) = viewModelScope.launch {
+        RetrofitInstance.api.getDetailMovie(id,API_KEY).let {
+            _detailMovie.postValue(it.body())
         }
     }
 
-    fun getItem(): MovieDetail {
-        return itemMovie
-    }
 
 }

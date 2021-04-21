@@ -21,4 +21,12 @@
     <string name="now_playing">Now Playing</string>
     <string name="top_rated">Top Rated</string>
     <string name="tv_popular">TV Popular</string>
+    <string name="status">Status</string>
+    <string name="revenue">Revenue</string>
+    <string name="vote_avarage">Vote Avarage</string>
+    <string name="total_episode">Total Episode</string>
+    <string name="episodes">Episodes</string>
+    <string name="upss_movie_not_found">Upss.. Movie Not Found</string>
+    <string name="try_to_search_with_other_keyword">Try to Search with Other Keyword</string>
+    <string name="try_other_keyword">Try Other Keyword</string>
 </resources>

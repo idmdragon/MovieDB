@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idm.moviedb.data.source.remote.movie.MovieResult
-import com.idm.moviedb.databinding.HorizontalItemBinding
 import com.idm.moviedb.databinding.VerticalItemBinding
-import com.idm.moviedb.ui.movies.MoviesListHorizontalViewHolder
 import com.idm.moviedb.ui.movies.MoviesListVerticalViewHolder
 import com.idm.moviedb.ui.movies.OnItemClickCallback
 

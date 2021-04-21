@@ -1,19 +1,19 @@
 package com.idm.moviedb.ui.movies
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.idm.moviedb.adapter.ListMovieAdapter
 import com.idm.moviedb.adapter.ListVerticalMovieAdapter
 import com.idm.moviedb.data.source.remote.movie.MovieResult
 import com.idm.moviedb.databinding.FragmentMoviesBinding
+import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
 
 class MoviesFragment : Fragment() {
 
@@ -56,6 +56,16 @@ class MoviesFragment : Fragment() {
         binding.rvTop.visibility = View.VISIBLE
         binding.shimmerFrameLayout2.stopShimmer()
         binding.shimmerFrameLayout2.visibility = View.GONE
+
+        topRatedAdapter.setOnItemCallback(
+            object : OnItemClickCallback {
+                override fun onItemClicked(movie: MovieResult) {
+                    val intent = Intent(requireContext(), DetailMovieActivity::class.java)
+                    intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
+                    startActivity(intent)
+                }
+            }
+        )
     }
 
     private fun setPlayingNow(playingNow: ArrayList<MovieResult>) {
@@ -66,15 +76,19 @@ class MoviesFragment : Fragment() {
         binding.shimmerNowPlaying.stopShimmer()
         binding.shimmerNowPlaying.visibility = View.GONE
         binding.rvNp.adapter = nowPlayingAdapter
-//        adapter.setOnItemCallback(
-//            object : OnItemClickCallback {
-//                override fun onItemClicked(movie: MovieResult) {
-//                    val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-//                    intent.putExtra(DetailMovieActivity.MOVIE_TITLE, movie.title)
-//                    startActivity(intent)
-//                }
-//            }
-//        )
+        nowPlayingAdapter.setOnItemCallback(
+            object : OnItemClickCallback {
+                override fun onItemClicked(movie: MovieResult) {
+                    val intent = Intent(requireContext(), DetailMovieActivity::class.java)
+                    intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
+                    startActivity(intent)
+                }
+            }
+        )
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
     }
 
