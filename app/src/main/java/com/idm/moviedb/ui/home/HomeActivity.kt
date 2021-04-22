@@ -11,13 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_1,
-            R.string.tab_2
-        )
-    }
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +18,6 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpNavigation()
-
-//        with(binding){
-//            viewPager.adapter = ViewPagerAdapter(this@HomeActivity)
-//            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//                tab.text = resources.getString(TAB_TITLES[position])
-//            }.attach()
-//        }
 
     }
 

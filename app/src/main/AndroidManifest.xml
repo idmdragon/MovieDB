@@ -13,8 +13,8 @@
         android:roundIcon="@drawable/ic_logo_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieDB">
-        <activity android:name=".ui.detail.movie.DetailMovieActivity" />
-        <activity android:name=".ui.detail.tvshow.DetailTvShowActivity" />
+        <activity android:name=".ui.movies.detail.DetailMovieActivity" />
+        <activity android:name=".ui.tvshow.detail.DetailTvShowActivity" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

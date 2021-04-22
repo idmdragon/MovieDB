@@ -3,10 +3,10 @@ package com.idm.moviedb.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.idm.moviedb.data.source.remote.tv.TvResult
+import com.idm.moviedb.data.models.tv.TvResult
 import com.idm.moviedb.databinding.VerticalItemBinding
-import com.idm.moviedb.ui.tvshow.OnItemClickCallback
-import com.idm.moviedb.ui.tvshow.TVShowViewHolder
+import com.idm.moviedb.ui.tvshow.home.OnItemClickCallback
+import com.idm.moviedb.ui.tvshow.home.TVShowViewHolder
 
 class ListTVShowAdapter(private val listItem: ArrayList<TvResult>) : RecyclerView.Adapter<TVShowViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {

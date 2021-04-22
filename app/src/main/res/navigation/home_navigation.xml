@@ -6,7 +6,7 @@
     app:startDestination="@id/movies">
     <fragment
         android:id="@+id/movies"
-        android:name="com.idm.moviedb.ui.movies.MoviesFragment"
+        android:name="com.idm.moviedb.ui.movies.home.MoviesFragment"
         android:label="fragment_movies"
         tools:layout="@layout/fragment_movies" />
     <fragment
@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/tv"
-        android:name="com.idm.moviedb.ui.tvshow.TvShowFragment"
+        android:name="com.idm.moviedb.ui.tvshow.home.TvShowFragment"
         android:label="fragment_tv_show"
         tools:layout="@layout/fragment_tv_show" />
 </navigation>

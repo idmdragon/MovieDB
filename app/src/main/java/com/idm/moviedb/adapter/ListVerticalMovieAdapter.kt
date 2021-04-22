@@ -3,10 +3,10 @@ package com.idm.moviedb.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.idm.moviedb.data.source.remote.movie.MovieResult
+import com.idm.moviedb.data.models.movie.MovieResult
 import com.idm.moviedb.databinding.VerticalItemBinding
-import com.idm.moviedb.ui.movies.MoviesListVerticalViewHolder
-import com.idm.moviedb.ui.movies.OnItemClickCallback
+import com.idm.moviedb.ui.movies.home.MoviesListVerticalViewHolder
+import com.idm.moviedb.ui.movies.home.OnItemClickCallback
 
 class ListVerticalMovieAdapter(private val listItem: ArrayList<MovieResult>) : RecyclerView.Adapter<MoviesListVerticalViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesListVerticalViewHolder {

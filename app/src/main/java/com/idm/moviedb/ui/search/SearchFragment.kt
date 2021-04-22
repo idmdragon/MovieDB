@@ -2,6 +2,7 @@ package com.idm.moviedb.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.SearchAdapter
-import com.idm.moviedb.data.source.remote.search.SearchResult
+import com.idm.moviedb.data.models.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
-import com.idm.moviedb.ui.detail.movie.DetailMovieActivity
+import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,6 +63,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun showRv(listSearch: ArrayList<SearchResult>?) {
+        Log.d("SearchFramgnet","Isi list Search di Search Fragment")
+
         activity.apply {
             val sizeResult = "Search Result(${listSearch?.size})"
             if (listSearch?.size==0){
