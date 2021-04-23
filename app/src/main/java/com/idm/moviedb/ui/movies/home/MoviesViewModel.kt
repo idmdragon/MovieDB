@@ -1,5 +1,6 @@
 package com.idm.moviedb.ui.movies.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,7 @@ class MoviesViewModel @Inject constructor(
         listPlayingNow = repository.getNowPlaying()
     }
 
-
+    suspend fun getTopValue() = repository.getTopRated()
+    suspend fun getNowPlayingValue() = repository.getNowPlaying()
 
 }

@@ -22,4 +22,6 @@ class TVShowViewModel @Inject constructor(
         listTvPopular = repository.getTvPopular()
     }
 
+    suspend fun getTvValueTvPopular() = repository.getTvPopular()
+
 }

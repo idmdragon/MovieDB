@@ -23,10 +23,6 @@ class SearchViewModel @Inject constructor(
     fun searchItem(query : String) = viewModelScope.launch {
         repository.movieSearch(query)
     }
-//    fun searchItem(query: String) = viewModelScope.launch {
-//        repository.movieSearch(query).let {
-//            _searchItemList.value = it.body()?.results
-//        }
-//    }
+
 
 }

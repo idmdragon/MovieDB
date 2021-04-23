@@ -3,6 +3,7 @@ package com.idm.moviedb.ui.tvshow.detail
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -59,7 +60,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
 
             tvGenre.text = listGenre.joinToString()
-            tvStoryLine.text = tvShow.overview
+            tvStoryline.text = tvShow.overview
             tvEpisodes.text = tvShow.number_of_episodes.toString()
             tvStar.text = tvShow.vote_average.toString()
 

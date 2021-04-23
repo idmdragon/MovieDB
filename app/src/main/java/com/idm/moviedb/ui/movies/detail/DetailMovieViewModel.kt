@@ -20,5 +20,7 @@ class DetailMovieViewModel @Inject constructor(
         detailMovie = repository.getDetailMovie(id)
     }
 
+    suspend fun getDetailMovie (id:Int) = repository.getDetailMovie(id)
+
 
 }

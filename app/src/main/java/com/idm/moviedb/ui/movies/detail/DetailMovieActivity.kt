@@ -3,6 +3,7 @@ package com.idm.moviedb.ui.movies.detail
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -44,12 +45,13 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun bindData(movie: MovieDetailResponse) {
         with(binding) {
+            Log.d("Detail","Isi Detail $movie")
             tvTittle.text = movie.title
             progressBar.isVisible = false
             val tagline = if (movie.tagline.isEmpty()){
-                movie.tagline
+                "Tagline Not Found"
             }else{
-               "Tagline Not Found"
+                movie.tagline
             }
             tvTagline.text = tagline
             tvStatus.text = movie.status
@@ -59,7 +61,7 @@ class DetailMovieActivity : AppCompatActivity() {
              }
 
             tvGenre.text = listGenre.joinToString()
-            tvStoryLine.text = movie.overview
+            tvStoryline.text = movie.overview
 
             val budget = movie.budget
             val convertBudget = NumberFormat.getNumberInstance(Locale.US).format(budget)

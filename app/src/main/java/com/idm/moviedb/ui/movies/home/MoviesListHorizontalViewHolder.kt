@@ -18,7 +18,7 @@ class MoviesListHorizontalViewHolder(private val binding: HorizontalItemBinding)
 
             Glide.with(itemView.context)
                 .load(IMAGE_PATH+movie.backdrop_path)
-                .transforms(CenterCrop(), RoundedCorners(8))
+                .transform(CenterCrop(), RoundedCorners(8))
                 .placeholder(ColorDrawable(Color.GRAY))
                 .apply(RequestOptions())
                 .into(ivPoster)

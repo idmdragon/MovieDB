@@ -180,7 +180,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <TextView
-            android:id="@+id/tv_story_line"
+            android:id="@+id/tvStoryline"
             style="@style/Heading2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

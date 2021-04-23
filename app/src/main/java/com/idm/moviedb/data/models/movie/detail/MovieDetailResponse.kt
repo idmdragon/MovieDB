@@ -5,7 +5,7 @@ import com.idm.moviedb.data.models.movie.detail.Genre
 data class MovieDetailResponse(
     val backdrop_path: String,
     val budget: Int,
-    val genres: List<Genre>,
+    val genres: Array<Genre>,
     val homepage: String,
     val id: Int,
     val original_language: String,

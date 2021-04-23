@@ -18,7 +18,7 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tv_genre"
+            app:layout_constraintBottom_toTopOf="@+id/tvGenre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -95,7 +95,7 @@
             tools:text="Behind Her Eyes" />
 
         <TextView
-            android:id="@+id/tv_tagline"
+            android:id="@+id/tvTagline"
             style="@style/Heading2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
         <TextView
-            android:id="@+id/tv_genre"
+            android:id="@+id/tvGenre"
             style="@style/Heading2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -147,8 +147,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/budget"
-            app:layout_constraintStart_toStartOf="@+id/tv_genre"
-            app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+            app:layout_constraintStart_toStartOf="@+id/tvGenre"
+            app:layout_constraintTop_toBottomOf="@+id/tvGenre" />
 
         <TextView
             android:id="@+id/tvBudget"
@@ -213,7 +213,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvRevenue" />
 
         <TextView
-            android:id="@+id/tv_story_line"
+            android:id="@+id/tv_storyline"
             style="@style/Heading2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -245,8 +245,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/vote_avarage"
-            app:layout_constraintStart_toStartOf="@+id/tv_tagline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tagline" />
+            app:layout_constraintStart_toStartOf="@+id/tvTagline"
+            app:layout_constraintTop_toBottomOf="@+id/tvTagline" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

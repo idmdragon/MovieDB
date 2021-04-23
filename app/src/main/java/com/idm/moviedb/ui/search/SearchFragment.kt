@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun showRv(listSearch: ArrayList<SearchResult>?) {
-        Log.d("SearchFramgnet","Isi list Search di Search Fragment")
+        Log.d("SearchFramgnet","Isi list Search di Search Fragment $listSearch")
 
         activity.apply {
             val sizeResult = "Search Result(${listSearch?.size})"

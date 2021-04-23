@@ -11,16 +11,19 @@ import com.idm.moviedb.data.models.tv.TvResult
 import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
 import com.idm.moviedb.data.source.remote.ApiService
 import com.idm.moviedb.utils.Constant.Companion.API_KEY
+import com.idm.moviedb.utils.EspressoIdlingResource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
 ) : DataSource {
 
     override suspend fun getTopRated(): LiveData<ArrayList<MovieResult>> {
+        EspressoIdlingResource.increment()
         val _listTopRated = MutableLiveData<ArrayList<MovieResult>>()
         val listTopRated: LiveData<ArrayList<MovieResult>> = _listTopRated
 
@@ -28,6 +31,8 @@ class MainRepository @Inject constructor(
             val response = apiService.getTopRated(API_KEY)
             if (response.isSuccessful) {
                 _listTopRated.postValue(response.body()?.results)
+                EspressoIdlingResource.decrement()
+
             } else {
                 Log.e("MainRepository", "getTopRated response fail")
             }
@@ -36,6 +41,7 @@ class MainRepository @Inject constructor(
     }
 
     override suspend fun getNowPlaying(): LiveData<ArrayList<MovieResult>> {
+        EspressoIdlingResource.increment()
         val _listNowPlaying = MutableLiveData<ArrayList<MovieResult>>()
         val listNowPlaying: LiveData<ArrayList<MovieResult>> = _listNowPlaying
 
@@ -43,6 +49,7 @@ class MainRepository @Inject constructor(
             val response = apiService.getNowPlaying(API_KEY)
             if (response.isSuccessful) {
                 _listNowPlaying.postValue(response.body()?.results)
+                EspressoIdlingResource.decrement()
             } else {
                 Log.e("MainRepository", "getNowPlaying response fail")
             }
@@ -51,12 +58,14 @@ class MainRepository @Inject constructor(
     }
 
     private val _searchItemList = MutableLiveData<ArrayList<SearchResult>>()
-    private val searchItemList : LiveData<ArrayList<SearchResult>> = _searchItemList
+    private val searchItemList: LiveData<ArrayList<SearchResult>> = _searchItemList
 
     override suspend fun movieSearch(query: String) {
+        EspressoIdlingResource.increment()
         CoroutineScope(Dispatchers.IO).launch {
             val response = apiService.movieSearch(API_KEY, query)
             if (response.isSuccessful) {
+                EspressoIdlingResource.decrement()
                 _searchItemList.postValue(response.body()?.results)
             } else {
                 Log.e("MainRepository", "movieSearch response fail")
@@ -64,12 +73,16 @@ class MainRepository @Inject constructor(
         }
     }
 
+
     fun getSearchItemList(): LiveData<ArrayList<SearchResult>> {
         return searchItemList
     }
 
 
+
+
     override suspend fun getTvPopular(): LiveData<ArrayList<TvResult>> {
+        EspressoIdlingResource.increment()
         val _listTvPopular = MutableLiveData<ArrayList<TvResult>>()
         val listTvPopular: LiveData<ArrayList<TvResult>> = _listTvPopular
 
@@ -77,6 +90,7 @@ class MainRepository @Inject constructor(
             val response = apiService.getTvPopular(API_KEY)
             if (response.isSuccessful) {
                 _listTvPopular.postValue(response.body()?.results)
+                EspressoIdlingResource.decrement()
             } else {
                 Log.e("MainRepository", "getTvPopular response fail")
             }
@@ -85,6 +99,7 @@ class MainRepository @Inject constructor(
     }
 
     override suspend fun getDetailMovie(movie_id: Int): LiveData<MovieDetailResponse> {
+        EspressoIdlingResource.increment()
         val _detailMovie = MutableLiveData<MovieDetailResponse>()
         val detailMovie: LiveData<MovieDetailResponse> = _detailMovie
 
@@ -92,6 +107,7 @@ class MainRepository @Inject constructor(
             val response = apiService.getDetailMovie(movie_id, API_KEY)
             if (response.isSuccessful) {
                 _detailMovie.postValue(response.body())
+                EspressoIdlingResource.decrement()
             } else {
                 Log.e("MainRepository", "getDetailMovie response fail")
             }
@@ -100,6 +116,7 @@ class MainRepository @Inject constructor(
     }
 
     override suspend fun getDetailTv(tv_id: Int): LiveData<TvDetailResponse> {
+        EspressoIdlingResource.increment()
         val _detailTv = MutableLiveData<TvDetailResponse>()
         val detailTv: LiveData<TvDetailResponse> = _detailTv
 
@@ -107,6 +124,7 @@ class MainRepository @Inject constructor(
             val response = apiService.getDetailTv(tv_id, API_KEY)
             if (response.isSuccessful) {
                 _detailTv.postValue(response.body())
+                EspressoIdlingResource.decrement()
             } else {
                 Log.e("MainRepository", "getDetailTv response fail")
             }

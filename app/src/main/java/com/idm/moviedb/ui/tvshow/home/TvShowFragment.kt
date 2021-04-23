@@ -2,6 +2,7 @@ package com.idm.moviedb.ui.tvshow.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class TvShowFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         activity.apply {
             tvShowViewModel.listTvPopular.observe(viewLifecycleOwner) {
+                Log.d("TVSHOWFRAGMENT","Isi listTvPopular $it")
                 adapter = ListTVShowAdapter(it)
                 adapter.notifyDataSetChanged()
                 binding.shimmerTopTV.stopShimmer()

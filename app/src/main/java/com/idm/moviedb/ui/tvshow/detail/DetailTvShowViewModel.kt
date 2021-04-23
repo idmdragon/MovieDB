@@ -21,5 +21,6 @@ class DetailTvShowViewModel @Inject constructor(
     fun setDetail(id : Int) = viewModelScope.launch {
         detailTvShow = repository.getDetailTv(id)
     }
+    suspend fun getDetail(id : Int) = repository.getDetailTv(id)
 
 }
