@@ -1,10 +1,10 @@
-package com.idm.moviedb.data.models.search
+package com.idm.moviedb.data.response.movie
 
-data class SearchResult(
+data class MovieResult(
     val backdrop_path: String,
     val id: Int,
+    val vote_average: Double,
     val poster_path: String,
     val release_date: String,
     val title: String,
-    val vote_average: Double,
 )

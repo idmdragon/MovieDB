@@ -3,17 +3,23 @@ package com.idm.moviedb.ui.tvshow.detail
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.snackbar.Snackbar
+import com.idm.moviedb.R
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
-import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
@@ -24,6 +30,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTvshowBinding
     private val detailTvShowViewModel: DetailTvShowViewModel by viewModels()
+    private var favState = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,41 +38,64 @@ class DetailTvShowActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val tvId = intent.getIntExtra(TV_ID, 0)
-        detailTvShowViewModel.setDetail(tvId)
+        detailTvShowViewModel.getDetailTV(tvId).observe(this, ::bindData)
+
+
+        detailTvShowViewModel.getTvItem(tvId).observe(this, {
+            if (it != null) {
+                favState = true
+                stateFavoriteIcon(true)
+            }
+        })
 
         binding.btnBack.setOnClickListener {
             finish()
         }
-        detailTvShowViewModel.detailTvShow.observe(this,::bindData)
 
     }
 
     private fun bindData(tvShow: TvDetailResponse) {
+
+        binding.btnSave.setOnClickListener {
+            if (favState == false) {
+                favState = true
+                stateFavoriteIcon(true)
+                CoroutineScope(Dispatchers.IO).launch {
+                    detailTvShowViewModel.insertTv(tvShow)
+                }
+                Snackbar.make(it, "TV Show Saved to Favorite", Snackbar.LENGTH_SHORT).show()
+            } else if (favState == true) {
+                stateFavoriteIcon(false)
+                favState = false
+                CoroutineScope(Dispatchers.IO).launch {
+                    detailTvShowViewModel.deleteTv(tvShow)
+                }
+                Snackbar.make(it, "TV Show Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
+            }
+
+        }
+
         with(binding) {
             progressBar.isVisible = false
-
-
-            val listGenre  = tvShow.genres.map {
+            val listGenre = tvShow.genres.map {
                 it.name
             }
+            tvGenre.text = listGenre.joinToString()
             val taglineNotFound = "Tagline Not Found"
-            val tagline = if (tvShow.tagline!=""){
+            val tagline = if (tvShow.tagline != "") {
                 tvShow.tagline
-            }else{
+            } else {
                 taglineNotFound
             }
             tvTagline.text = tagline
             tvStatus.text = tvShow.status
             tvTittle.text = tvShow.name
-
-
-            tvGenre.text = listGenre.joinToString()
             tvStoryline.text = tvShow.overview
             tvEpisodes.text = tvShow.number_of_episodes.toString()
             tvStar.text = tvShow.vote_average.toString()
 
             Glide.with(this@DetailTvShowActivity)
-                .load(Constant.IMAGE_PATH +tvShow.poster_path)
+                .load(Constant.IMAGE_PATH + tvShow.poster_path)
                 .transform(CenterCrop(), RoundedCorners(16))
                 .placeholder(ColorDrawable(Color.GRAY))
                 .into(ivPoster)
@@ -74,5 +104,23 @@ class DetailTvShowActivity : AppCompatActivity() {
         }
     }
 
+    private fun stateFavoriteIcon(state: Boolean) {
+        if (state == true) {
+            binding.btnSave.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.ic_favorite_active
+                )
+            )
+
+        } else if (state == false) {
+            binding.btnSave.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.ic_favorite_inactive
+                )
+            )
+        }
+    }
 
 }

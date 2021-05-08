@@ -1,11 +1,8 @@
 package com.idm.moviedb.utils
 
-import com.idm.moviedb.data.models.movie.MovieResult
-import com.idm.moviedb.data.models.movie.detail.Genre
-
-import com.idm.moviedb.data.models.movie.detail.MovieDetailResponse
-
-
+import com.idm.moviedb.data.response.movie.MovieResult
+import com.idm.moviedb.data.response.movie.detail.Genre
+import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 
 object DummyMovie {
     fun generateTopMovie(): ArrayList<MovieResult> {
@@ -423,7 +420,7 @@ object DummyMovie {
         val movie = MovieDetailResponse(
             backdrop_path = "/xRI636TOdS1K1GBqIBRSmfZ1T5x.jpg",
             budget = 13200000,
-            genres = arrayOf<Genre>(
+            genres = listOf(
                 Genre("Comedy"), Genre("Drama"),
                 Genre("Romance")
             ),
@@ -431,7 +428,12 @@ object DummyMovie {
             id = 19404,
             original_language = "hi",
             original_title = "दिलवाले दुल्हनिया ले जायेंगे",
-            overview = "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.", poster_path="/2CAL2433ZeIihfX1Hb2139CX0pW.jpg", release_date="1995-10-20", revenue=100000000, status="Released", tagline="Come Fall In love, All Over Again..",
+            overview = "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.",
+            poster_path = "/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+            release_date = "1995-10-20",
+            revenue = 100000000,
+            status = "Released",
+            tagline = "Come Fall In love, All Over Again..",
             title = "Dilwale Dulhania Le Jayenge",
             vote_average = 8.7
 
@@ -439,10 +441,30 @@ object DummyMovie {
         return movie
     }
 
-    fun generateNowPlayingMovie():MovieDetailResponse{
-        return MovieDetailResponse(backdrop_path="/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg", budget=200000000,     genres = arrayOf(
-            Genre("Action"), Genre("Science Fiction")
-        ), homepage="https://Webcam.drylink.in", id=399566, original_language="en", original_title="Godzilla vs. Kong", overview="In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.", poster_path="/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg", release_date="2021-03-24", revenue=390215000, status="Released", tagline="One Will Fall", title="Godzilla vs. Kong", vote_average=8.3)
+    fun generateNowPlayingMovie(): MovieDetailResponse {
+        return MovieDetailResponse(
+            backdrop_path = "/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
+            budget = 20000000,
+            genres = listOf(
+                Genre("Fantasy"),
+                Genre("Action"),
+                Genre("Adventure"),
+                Genre("Science Fiction"),
+                Genre("Thriller")
+            ),
+            homepage = "https://www.mortalkombatmovie.net",
+            id = 460465,
+            original_language = "en",
+            original_title = "Mortal Kombat",
+            overview = "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
+            poster_path = "/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg",
+            release_date = "2021-04-07",
+            revenue = 50115000,
+            status = "Released",
+            tagline = "Get over here.",
+            title = "Mortal Kombat",
+            vote_average = 8.0
+        )
     }
 
 

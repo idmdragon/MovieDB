@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="24dp"
+    tools:background="@color/black"
+    android:layout_marginEnd="16dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="129dp"
+        android:layout_height="164dp"
+        tools:background="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/poster" />
+
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_poster"
+        tools:text="Behind Her Eyes" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        style="@android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/white"
+        android:rating="3.3"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:stepSize="0.1"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@ package com.idm.moviedb.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.idm.moviedb.data.models.search.SearchResult
+import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.databinding.VerticalItemBinding
 import com.idm.moviedb.ui.search.SearchViewHolder
 import com.idm.moviedb.ui.search.OnItemClickCallback

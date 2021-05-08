@@ -1,10 +1,10 @@
 package com.idm.moviedb.data.source.remote
 
-import com.idm.moviedb.data.models.movie.MovieResponse
-import com.idm.moviedb.data.models.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.models.search.SearchResponse
-import com.idm.moviedb.data.models.tv.TvResponse
-import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.response.movie.MovieResponse
+import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.response.search.SearchResponse
+import com.idm.moviedb.data.response.tv.TvResponse
+import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

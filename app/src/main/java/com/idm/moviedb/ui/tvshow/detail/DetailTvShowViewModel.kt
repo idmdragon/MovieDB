@@ -1,12 +1,10 @@
 package com.idm.moviedb.ui.tvshow.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.idm.moviedb.data.models.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.data.source.repositories.MainRepository
-import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,11 +14,11 @@ class DetailTvShowViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
 
-    lateinit var detailTvShow : LiveData<TvDetailResponse>
+    fun getDetailTV(id : Int) = repository.getDetailTv(id)
 
-    fun setDetail(id : Int) = viewModelScope.launch {
-        detailTvShow = repository.getDetailTv(id)
+    suspend fun insertTv(tv : TvDetailResponse) =  repository.insertTv(tv)
+    suspend fun deleteTv(tv : TvDetailResponse) =  repository.deleteTv(tv)
+
+    fun getTvItem(id: Int) = repository.getTvItem(id)
     }
-    suspend fun getDetail(id : Int) = repository.getDetailTv(id)
 
-}

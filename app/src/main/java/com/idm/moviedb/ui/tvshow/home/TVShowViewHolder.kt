@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.idm.moviedb.data.models.tv.TvResult
+import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.databinding.VerticalItemBinding
 import com.idm.moviedb.utils.Constant
 import java.text.SimpleDateFormat
@@ -23,7 +23,6 @@ class TVShowViewHolder(private val binding: VerticalItemBinding) : RecyclerView.
                 tvDate.text = formattedDatesString
             }
 
-
             tvTittle.text = item.name
             val rate : Double = item.vote_average/2
             ratingBar.rating = rate.toFloat()
@@ -34,7 +33,6 @@ class TVShowViewHolder(private val binding: VerticalItemBinding) : RecyclerView.
                 .placeholder(ColorDrawable(Color.GRAY))
                 .apply(RequestOptions().override(128, 164))
                 .into(ivPoster)
-
 
         }
 

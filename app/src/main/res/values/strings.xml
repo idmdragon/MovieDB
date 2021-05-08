@@ -29,4 +29,10 @@
     <string name="upss_movie_not_found">Upss.. Movie Not Found</string>
     <string name="try_to_search_with_other_keyword">Try to Search with Other Keyword</string>
     <string name="try_other_keyword">Try Other Keyword</string>
+    <string name="backbutton">backButton</string>
+    <string name="logo">Logo</string>
+    <string name="button_save">button save</string>
+    <string name="favorite_tv_has_been_saved">Favorite TV has been saved</string>
+    <string name="no_favorite_movies_found">No Favorite Movies Found</string>
+    <string name="no_favorite_tv_show_found">No Favorite TV Show Found</string>
 </resources>

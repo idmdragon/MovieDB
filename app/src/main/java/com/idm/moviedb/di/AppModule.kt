@@ -1,10 +1,15 @@
 package com.idm.moviedb.di
 
 import android.content.Context
+import androidx.room.Room
 import androidx.viewbinding.BuildConfig
 import com.idm.moviedb.BaseApplication
+import com.idm.moviedb.data.source.local.MovieDao
+import com.idm.moviedb.data.source.local.MovieTvItemDatabase
+import com.idm.moviedb.data.source.local.TvDao
 import com.idm.moviedb.data.source.remote.ApiService
 import com.idm.moviedb.utils.Constant
+import com.idm.moviedb.utils.Constant.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,4 +60,27 @@ object AppModule {
             .build()
             .create(ApiService::class.java)
     }
+
+
+    @Singleton
+    @Provides
+    fun provideMovieItemDatabase(
+        @ApplicationContext context : Context
+    )= Room.databaseBuilder(context, MovieTvItemDatabase::class.java,DATABASE_NAME).build()
+
+    @Singleton
+    @Provides
+    fun provideMovieDao(
+        database: MovieTvItemDatabase
+    ) : MovieDao {
+        return database.movieDao()
+    }
+    @Singleton
+    @Provides
+    fun provideTvDao(
+        database: MovieTvItemDatabase
+    ) : TvDao {
+        return database.tvDao()
+    }
+
 }

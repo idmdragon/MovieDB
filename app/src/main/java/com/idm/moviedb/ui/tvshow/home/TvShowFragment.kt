@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.databinding.FragmentTvShowBinding
-import com.idm.moviedb.data.models.tv.TvResult
+import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,11 +34,10 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowViewModel.getTvPopular()
         binding.rvTvshow.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         activity.apply {
-            tvShowViewModel.listTvPopular.observe(viewLifecycleOwner) {
+            tvShowViewModel.getTvPopular().observe(viewLifecycleOwner) {
                 Log.d("TVSHOWFRAGMENT","Isi listTvPopular $it")
                 adapter = ListTVShowAdapter(it)
                 adapter.notifyDataSetChanged()

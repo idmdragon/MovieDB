@@ -3,7 +3,7 @@ package com.idm.moviedb.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.idm.moviedb.data.models.movie.MovieResult
+import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.databinding.HorizontalItemBinding
 import com.idm.moviedb.ui.movies.home.MoviesListHorizontalViewHolder
 import com.idm.moviedb.ui.movies.home.OnItemClickCallback

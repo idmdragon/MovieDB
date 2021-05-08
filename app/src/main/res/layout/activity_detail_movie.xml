@@ -53,7 +53,8 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/backbutton" />
 
         <TextView
             android:id="@+id/textView"
@@ -69,6 +70,17 @@
             app:layout_constraintStart_toStartOf="@+id/iv_poster"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/btn_save"
+            android:src="@drawable/ic_btn_save"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/button_save" />
         <ImageView
             android:id="@+id/iv_poster"
             android:layout_width="match_parent"

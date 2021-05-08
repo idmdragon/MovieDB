@@ -1,11 +1,9 @@
 package com.idm.moviedb.ui.movies.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.source.repositories.MainRepository
-import com.idm.moviedb.data.models.movie.detail.MovieDetailResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,13 +12,13 @@ import javax.inject.Inject
 class DetailMovieViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-    lateinit var detailMovie : LiveData<MovieDetailResponse>
 
-    fun setDetail(id : Int) = viewModelScope.launch {
-        detailMovie = repository.getDetailMovie(id)
+    fun getDetailMovie(id : Int) = repository.getDetailMovie(id)
+
+    suspend fun insertMovie(movie : MovieDetailResponse) =  repository.insertMovie(movie)
+    suspend fun deleteMovie(movie: MovieDetailResponse) = repository.deleteMovie(movie)
+
+    fun getMovieItem(id: Int) = repository.getMovieItem(id)
     }
 
-    suspend fun getDetailMovie (id:Int) = repository.getDetailMovie(id)
 
-
-}

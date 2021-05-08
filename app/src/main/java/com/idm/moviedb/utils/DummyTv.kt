@@ -1,8 +1,8 @@
 package com.idm.moviedb.utils
 
-import com.idm.moviedb.data.models.tv.TvResult
-import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.models.tv.detail.Genre
+import com.idm.moviedb.data.response.tv.TvResult
+import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.response.tv.detail.Genre
 object DummyTv {
     fun generateListTvShow(): ArrayList<TvResult> {
         val tvShow = ArrayList<TvResult>()

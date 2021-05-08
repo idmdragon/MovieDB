@@ -1,6 +1,6 @@
 package com.idm.moviedb.utils
 
-import com.idm.moviedb.data.models.search.SearchResult
+import com.idm.moviedb.data.response.search.SearchResult
 
 object DummySearch {
     fun getDummySearch(): ArrayList<SearchResult> {

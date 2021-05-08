@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.adapter.SearchAdapter
-import com.idm.moviedb.data.models.search.SearchResult
+import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
 import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,27 +39,25 @@ class SearchFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isEmpty()) {
+                return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isEmpty()) {
                     shimmerLoading(false)
                 } else {
                     shimmerLoading(true)
                     binding.tvResult.visibility = View.GONE
                     searchIlus(false)
-                    searchViewModel.searchItem(query)
+                    activity.apply {
+                        searchViewModel.searchItem(newText).observe(viewLifecycleOwner,::showRv)
+                    }
+
                     binding.searchNotfound.visibility = View.GONE
                 }
                 return true
             }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return true
-            }
         })
 
-
-        activity.apply {
-            searchViewModel.searchItemList.observe(viewLifecycleOwner, ::showRv)
-        }
     }
 
     private fun showRv(listSearch: ArrayList<SearchResult>?) {

@@ -2,7 +2,6 @@ package com.idm.moviedb.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.idm.moviedb.R

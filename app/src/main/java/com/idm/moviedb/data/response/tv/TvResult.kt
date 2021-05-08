@@ -1,4 +1,4 @@
-package com.idm.moviedb.data.models.tv
+package com.idm.moviedb.data.response.tv
 
 data class TvResult(
     val backdrop_path: String,
