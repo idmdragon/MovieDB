@@ -1,7 +1,11 @@
 package com.idm.moviedb.data.response.search
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "search_list")
 data class SearchResult(
-    val backdrop_path: String,
+    @PrimaryKey
     val id: Int,
     val poster_path: String,
     val release_date: String,

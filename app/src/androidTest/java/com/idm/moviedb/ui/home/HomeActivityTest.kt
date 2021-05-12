@@ -3,7 +3,7 @@ package com.idm.moviedb.ui.home
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.IdlingRegistry
-import com.idm.moviedb.utils.DummyMovie
+import com.idm.moviedb.utils.dummyData.DummyMovie
 import com.idm.moviedb.utils.EspressoIdlingResource
 import org.junit.After
 import androidx.test.espresso.Espresso.onView
@@ -13,9 +13,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.idm.moviedb.R
-import com.idm.moviedb.utils.DummyMovie.generateNowPlayingMovie
-import com.idm.moviedb.utils.DummyMovie.generateTopMovieDetail
-import com.idm.moviedb.utils.DummyTv
+import com.idm.moviedb.utils.dummyData.DummyMovie.generateNowPlayingMovie
+import com.idm.moviedb.utils.dummyData.DummyMovie.generateTopMovieDetail
+import com.idm.moviedb.utils.dummyData.DummyTv
 import org.junit.Before
 import org.junit.Test
 import java.text.NumberFormat

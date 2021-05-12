@@ -1,6 +1,5 @@
 package com.idm.moviedb.ui.favorite
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.idm.moviedb.R
-import com.idm.moviedb.ui.favorite.FavoriteViewPagerAdapter
 import com.idm.moviedb.databinding.FragmentFavoriteBinding
 
 

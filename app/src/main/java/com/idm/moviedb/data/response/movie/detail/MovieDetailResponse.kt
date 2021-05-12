@@ -16,7 +16,6 @@ data class MovieDetailResponse(
     val backdrop_path: String ="",
     val budget: Int= 0,
     val genres: List<Genre>,
-    val homepage: String="",
     @PrimaryKey
     val id: Int,
     val original_language: String="",

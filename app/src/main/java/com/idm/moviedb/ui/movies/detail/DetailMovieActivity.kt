@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -16,7 +15,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.idm.moviedb.R
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.source.remote.StatusResponse
 import com.idm.moviedb.utils.Constant
+import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +50,17 @@ class DetailMovieActivity : AppCompatActivity() {
             }
         })
 
-        detailMovieViewModel.getDetailMovie(movieID).observe(this, ::bindData)
+        detailMovieViewModel.getDetailMovie(movieID).observe(this,{
+            when (it.status) {
+                StatusResponse.EMPTY -> {
+                }
+                StatusResponse.SUCCESS -> {
+                    bindData(it.body)
+                }
+                StatusResponse.ERROR -> {
+                }
+            }
+        })
 
         binding.btnBack.setOnClickListener {
             finish()

@@ -1,4 +1,4 @@
-package com.idm.moviedb.utils
+package com.idm.moviedb.utils.dummyData
 
 import com.idm.moviedb.data.response.search.SearchResult
 
@@ -7,7 +7,6 @@ object DummySearch {
         val listSearch = ArrayList<SearchResult>()
         listSearch.add(
             SearchResult(
-                backdrop_path = "",
                 id = 219048,
                 poster_path = "/3V8xJIFe1GTEcB3omF4lYlPQJji.jpg",
                 release_date = "2013-10-09",

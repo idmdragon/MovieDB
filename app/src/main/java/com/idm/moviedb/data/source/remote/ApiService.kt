@@ -2,6 +2,8 @@ package com.idm.moviedb.data.source.remote
 
 import com.idm.moviedb.data.response.movie.MovieResponse
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
+import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
 import com.idm.moviedb.data.response.search.SearchResponse
 import com.idm.moviedb.data.response.tv.TvResponse
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
@@ -15,7 +17,7 @@ interface ApiService {
     suspend fun getTopRated(
         @Query("api_key")
         api_key: String
-    ): Response<MovieResponse>
+    ): Response<MovieTopRatedResponse>
 
     @GET("/3/movie/now_playing")
     suspend fun getNowPlaying(

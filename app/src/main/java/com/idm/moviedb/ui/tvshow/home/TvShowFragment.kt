@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.adapter.ListTVShowAdapter
 import com.idm.moviedb.databinding.FragmentTvShowBinding
 import com.idm.moviedb.data.response.tv.TvResult
+import com.idm.moviedb.ui.movies.home.MoviePagedListAdapterHorizontal
 import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
+import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +22,7 @@ class TvShowFragment : Fragment() {
 
     private val tvShowViewModel: TVShowViewModel by activityViewModels()
     private var _binding: FragmentTvShowBinding? = null
-    private lateinit var adapter: ListTVShowAdapter
+    private lateinit var adapter: TvPagedListAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -37,27 +39,33 @@ class TvShowFragment : Fragment() {
         binding.rvTvshow.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         activity.apply {
-            tvShowViewModel.getTvPopular().observe(viewLifecycleOwner) {
-                Log.d("TVSHOWFRAGMENT","Isi listTvPopular $it")
-                adapter = ListTVShowAdapter(it)
-                adapter.notifyDataSetChanged()
-                binding.shimmerTopTV.stopShimmer()
-                binding.shimmerTopTV.visibility = View.GONE
-                binding.rvTvshow.adapter = adapter
-
-                adapter.setOnItemCallback(
-                    object : OnItemClickCallback {
-                        override fun onItemClicked(tvShow: TvResult) {
-                            val intent = Intent(requireContext(), DetailTvShowActivity::class.java)
-                            intent.putExtra(DetailTvShowActivity.TV_ID, tvShow.id)
-                            startActivity(intent)
-                        }
+            tvShowViewModel.getTvPopular().observe(viewLifecycleOwner,{
+                when (it.status) {
+                    Status.LOADING -> {
                     }
-                )
-            }
+                    Status.SUCCESS -> {
+                        it.data?.let { it1 -> setTvShow(it1) }
+                    }
+                    Status.ERROR -> {
+                    }
+                }
+            })
+
 
         }
     }
+
+    private fun setTvShow(items: PagedList<TvResult>) {
+        adapter = TvPagedListAdapter()
+        adapter.submitList(items)
+        binding.rvTvshow.adapter = adapter
+        adapter.notifyDataSetChanged()
+        binding.rvTvshow.visibility = View.VISIBLE
+        binding.shimmerTopTV.stopShimmer()
+        binding.shimmerTopTV.visibility = View.GONE
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

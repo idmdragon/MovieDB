@@ -7,20 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.adapter.ListMovieAdapter
-import com.idm.moviedb.adapter.ListVerticalMovieAdapter
 import com.idm.moviedb.data.response.movie.MovieResult
+import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
 import com.idm.moviedb.databinding.FragmentMoviesBinding
-import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
+import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
 
     private val moviesViewModel: MoviesViewModel by activityViewModels()
-    private lateinit var topRatedAdapter: ListMovieAdapter
-    private lateinit var nowPlayingAdapter: ListVerticalMovieAdapter
+    private lateinit var topRatedAdapter: MoviePagedListAdapterHorizontal
+    private lateinit var nowPlayingAdapter: MoviePagedListAdapterVertical
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
 
@@ -37,50 +37,67 @@ class MoviesFragment : Fragment() {
 
 
         activity.apply {
-            moviesViewModel.getTopRated().observe(viewLifecycleOwner,::setTopRated)
-            moviesViewModel.getNowPlaying().observe(viewLifecycleOwner,::setPlayingNow)
+            moviesViewModel.getTopRated().observe(viewLifecycleOwner,{
+                        when (it.status) {
+                            Status.LOADING -> {
+                            }
+                            Status.SUCCESS -> {
+                                it.data?.let {
+                                    topRatedAdapter = MoviePagedListAdapterHorizontal()
+                                    topRatedAdapter.submitList(it)
+                                    topRatedAdapter.notifyDataSetChanged()
+                                    binding.rvTop.adapter = topRatedAdapter
+                                    binding.rvTop.visibility = View.VISIBLE
+                                    binding.shimmerFrameLayout2.stopShimmer()
+                                    binding.shimmerFrameLayout2.visibility = View.GONE
+                                }
+                            }
+                            Status.ERROR -> {
+                            }
+                        }
+                })
+
+            moviesViewModel.getNowPlaying().observe(viewLifecycleOwner,{
+                when (it.status) {
+                    Status.LOADING -> {
+                    }
+                    Status.SUCCESS -> {
+                        it.data?.let {
+                            nowPlayingAdapter = MoviePagedListAdapterVertical()
+                            nowPlayingAdapter.submitList(it)
+                            nowPlayingAdapter.notifyDataSetChanged()
+                            binding.shimmerNowPlaying.stopShimmer()
+                            binding.shimmerNowPlaying.visibility = View.GONE
+                            binding.rvNp.adapter = nowPlayingAdapter
+                        }
+                    }
+                    Status.ERROR -> {
+                    }
+                }
+            })
             binding.rvTop.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
             binding.rvNp.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         }
+    }
 
 
-}
 
-    private fun setTopRated(topRated: ArrayList<MovieResult>) {
-        topRatedAdapter = ListMovieAdapter(topRated)
+
+    private fun setTopRated(items: PagedList<MovieTopRated>) {
+        topRatedAdapter = MoviePagedListAdapterHorizontal()
+        topRatedAdapter.submitList(items)
         topRatedAdapter.notifyDataSetChanged()
         binding.rvTop.adapter = topRatedAdapter
         binding.rvTop.visibility = View.VISIBLE
         binding.shimmerFrameLayout2.stopShimmer()
         binding.shimmerFrameLayout2.visibility = View.GONE
 
-        topRatedAdapter.setOnItemCallback(
-            object : OnItemClickCallback {
-                override fun onItemClicked(movie: MovieResult) {
-                    val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-                    intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
-                    startActivity(intent)
-                }
-            }
-        )
+
     }
 
-    private fun setPlayingNow(playingNow: ArrayList<MovieResult>) {
-        nowPlayingAdapter = ListVerticalMovieAdapter(playingNow)
-        nowPlayingAdapter.notifyDataSetChanged()
+    private fun setPlayingNow(items: PagedList<MovieResult>) {
 
-        binding.shimmerNowPlaying.stopShimmer()
-        binding.shimmerNowPlaying.visibility = View.GONE
-        binding.rvNp.adapter = nowPlayingAdapter
-        nowPlayingAdapter.setOnItemCallback(
-            object : OnItemClickCallback {
-                override fun onItemClicked(movie: MovieResult) {
-                    val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-                    intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
-                    startActivity(intent)
-                }
-            }
-        )
+
     }
     override fun onDestroy() {
         super.onDestroy()

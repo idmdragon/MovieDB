@@ -1,5 +1,6 @@
 package com.idm.moviedb.ui.search
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.databinding.VerticalItemBinding
+import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
+import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
 import com.idm.moviedb.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,6 +45,11 @@ class SearchViewHolder(private val binding: VerticalItemBinding) :
                 .into(ivPoster)
 
 
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.MOVIE_ID, item.id)
+                itemView.context.startActivity(intent)
+            }
         }
 
     }

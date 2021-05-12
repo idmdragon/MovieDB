@@ -2,12 +2,10 @@ package com.idm.moviedb.ui.movies.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.idm.moviedb.data.models.movie.MovieResult
-import com.idm.moviedb.data.source.repositories.MainRepository
+import com.idm.moviedb.data.response.movie.MovieResult
 import androidx.lifecycle.MutableLiveData
-import com.idm.moviedb.TestCoroutineRule
-import com.idm.moviedb.utils.DummyMovie
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.idm.moviedb.data.repositories.MainRepository
+import com.idm.moviedb.utils.dummyData.DummyMovie
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -18,7 +16,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
-@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
 
@@ -26,9 +23,6 @@ class MoviesViewModelTest {
 
     @get:Rule
     val instantExecutor = InstantTaskExecutorRule()
-
-    @get:Rule
-    val testCoroutineRule = TestCoroutineRule()
 
     @Mock
     private lateinit var mainRepository: MainRepository
@@ -43,30 +37,30 @@ class MoviesViewModelTest {
 
 
     @Test
-    fun getTopRated() = testCoroutineRule.runBlockingTest {
-        val dummyMovies = DummyMovie.generateTopMovie()
-        val listMovie = MutableLiveData(dummyMovies)
+    fun getTopRated() {
+        val dummyMovie = DummyMovie.generateTopMovie()
+        val listMovie = MutableLiveData(dummyMovie)
         `when`(mainRepository.getTopRated()).thenReturn(listMovie)
-        val movieEntities = viewModel.getTopValue().value
+        val movieEntities = viewModel.getTopRated().value
         verify(mainRepository).getTopRated()
         assertNotNull(movieEntities)
-
-        viewModel.getTopValue().observeForever(listMovieObserver)
-        viewModel.getTopValue().removeObserver(listMovieObserver)
+        viewModel.getTopRated().observeForever(listMovieObserver)
+        verify(listMovieObserver).onChanged(dummyMovie)
+        viewModel.getTopRated().removeObserver(listMovieObserver)
 
     }
 
     @Test
-    fun getNowPlaying() = testCoroutineRule.runBlockingTest {
+    fun getNowPlaying() {
         val dummyMovies = DummyMovie.generateNowPlaying()
         val listMovie = MutableLiveData(dummyMovies)
         `when`(mainRepository.getNowPlaying()).thenReturn(listMovie)
-        val movieEntities = viewModel.getNowPlayingValue().value
+        val movieEntities = viewModel.getNowPlaying().value
         verify(mainRepository).getNowPlaying()
         assertNotNull(movieEntities)
-
-        viewModel.getNowPlayingValue().observeForever(listMovieObserver)
-        viewModel.getNowPlayingValue().removeObserver(listMovieObserver)
+        viewModel.getNowPlaying().observeForever(listMovieObserver)
+        verify(listMovieObserver).onChanged(dummyMovies)
+        viewModel.getNowPlaying().removeObserver(listMovieObserver)
     }
 
 

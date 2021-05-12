@@ -1,12 +1,9 @@
 package com.idm.moviedb.ui.tvshow.detail
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.source.repositories.MainRepository
+import com.idm.moviedb.data.repositories.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

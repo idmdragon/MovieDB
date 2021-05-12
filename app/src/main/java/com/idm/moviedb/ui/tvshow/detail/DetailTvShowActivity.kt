@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.idm.moviedb.R
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.remote.StatusResponse
 import com.idm.moviedb.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -38,7 +39,17 @@ class DetailTvShowActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val tvId = intent.getIntExtra(TV_ID, 0)
-        detailTvShowViewModel.getDetailTV(tvId).observe(this, ::bindData)
+        detailTvShowViewModel.getDetailTV(tvId).observe(this, {
+            when (it.status) {
+                StatusResponse.EMPTY -> {
+                }
+                StatusResponse.SUCCESS -> {
+                    bindData(it.body)
+                }
+                StatusResponse.ERROR -> {
+                }
+            }
+        })
 
 
         detailTvShowViewModel.getTvItem(tvId).observe(this, {

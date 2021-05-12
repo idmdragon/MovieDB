@@ -10,11 +10,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.adapter.SearchAdapter
 import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.databinding.FragmentSearchBinding
-import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
+import com.idm.moviedb.ui.movies.home.MoviePagedListAdapterHorizontal
+import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +23,7 @@ class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
     private var _binding: FragmentSearchBinding? = null
-    private lateinit var adapter: SearchAdapter
+    private lateinit var adapter: SearchPagedListAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -49,7 +50,17 @@ class SearchFragment : Fragment() {
                     binding.tvResult.visibility = View.GONE
                     searchIlus(false)
                     activity.apply {
-                        searchViewModel.searchItem(newText).observe(viewLifecycleOwner,::showRv)
+                        searchViewModel.searchItem(newText).observe(viewLifecycleOwner,{
+                            when (it.status) {
+                                Status.LOADING -> {
+                                }
+                                Status.SUCCESS -> {
+                                    it.data?.let { it1 -> searchBind(it1) }
+                                }
+                                Status.ERROR -> {
+                                }
+                            }
+                        })
                     }
 
                     binding.searchNotfound.visibility = View.GONE
@@ -60,40 +71,29 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun showRv(listSearch: ArrayList<SearchResult>?) {
-        Log.d("SearchFramgnet","Isi list Search di Search Fragment $listSearch")
+    private fun searchBind(items: PagedList<SearchResult>?) {
 
         activity.apply {
-            val sizeResult = "Search Result(${listSearch?.size})"
-            if (listSearch?.size==0){
+            val sizeResult = "Search Result(${items?.size})"
+            if (items?.size==0){
                 binding.searchNotfound.visibility = View.VISIBLE
             }else{
                 binding.searchNotfound.visibility = View.GONE
             }
             binding.tvResult.text = sizeResult
-            if (listSearch != null) {
+            if (items != null) {
                 with(binding) {
                     shimmerLoading(false)
                     searchIlus(false)
-
                     rvSearch.visibility = View.VISIBLE
-                    binding.tvResult.visibility = View.VISIBLE
+                    tvResult.visibility = View.VISIBLE
                     rvSearch.layoutManager = LinearLayoutManager(activity)
-
-                    adapter = SearchAdapter(listSearch)
+                    adapter = SearchPagedListAdapter()
+                    adapter.submitList(items)
+                    adapter.notifyDataSetChanged()
                     rvSearch.adapter = adapter
                 }
-                adapter.notifyDataSetChanged()
 
-                adapter.setOnItemCallback(
-                    object : OnItemClickCallback {
-                        override fun onItemClicked(result: SearchResult) {
-                            val intent = Intent(requireContext(), DetailMovieActivity::class.java)
-                            intent.putExtra(DetailMovieActivity.MOVIE_ID, result.id)
-                            startActivity(intent)
-                        }
-                    }
-                )
             }
 
         }

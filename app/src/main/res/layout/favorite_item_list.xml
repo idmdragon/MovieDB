@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_marginBottom="24dp"
     tools:background="@color/black"
+    android:id="@+id/layout_item_list"
     android:layout_marginEnd="16dp"
     android:layout_height="wrap_content">
 
@@ -40,7 +41,6 @@
         style="@android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:isIndicator="true"
         android:numStars="5"
@@ -51,7 +51,6 @@
         android:stepSize="0.1"
         android:transformPivotX="0dp"
         android:transformPivotY="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintStart_toStartOf="@+id/tv_tittle"
         app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

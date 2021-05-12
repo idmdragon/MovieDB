@@ -3,12 +3,11 @@ package com.idm.moviedb.ui.tvshow.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.idm.moviedb.TestCoroutineRule
-import com.idm.moviedb.data.models.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.source.repositories.MainRepository
-import com.idm.moviedb.utils.DummyTv
+import com.idm.moviedb.data.repositories.MainRepository
+import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.utils.dummyData.DummyTv
+import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,16 +18,12 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 
-@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class DetailTvShowViewModelTest {
     private lateinit var viewModel: DetailTvShowViewModel
 
     @get:Rule
     val instantExecutor = InstantTaskExecutorRule()
-
-    @get:Rule
-    val testCoroutineRule = TestCoroutineRule()
 
     @Mock
     private lateinit var mainRepository: MainRepository
@@ -42,18 +37,34 @@ class DetailTvShowViewModelTest {
 
     }
 
-
     @Test
-    fun getDetailTv() = testCoroutineRule.runBlockingTest {
+    fun getDetailTv() {
         val dummyTv = DummyTv.generateTvDetail()
         val detailTv = MutableLiveData(dummyTv)
-        `when`(mainRepository.getDetailTv(88396)).thenReturn(detailTv)
-        val tvEntities = viewModel.getDetail(88396).value
-        verify(mainRepository).getDetailTv(88396)
+        val tvId = 88396
+        `when`(mainRepository.getDetailTv(tvId)).thenReturn(detailTv)
+        val tvEntities = viewModel.getDetailTV(tvId).value
+        verify(mainRepository).getDetailTv(tvId)
         assertNotNull(tvEntities)
 
-        viewModel.getDetail(88396).observeForever(detailTvObserver)
-        viewModel.getDetail(88396).removeObserver(detailTvObserver)
+        if (tvEntities != null) {
+            assertEquals(dummyTv.name, tvEntities.name)
+            assertEquals(dummyTv.tagline, tvEntities.tagline)
+            assertEquals(dummyTv.number_of_episodes, tvEntities.number_of_episodes)
+            assertEquals(dummyTv.overview, tvEntities.overview)
+            assertEquals(dummyTv.genres.toString(), tvEntities.genres.toString())
+            assertEquals(dummyTv.status, tvEntities.status)
+            assertEquals(dummyTv.poster_path, tvEntities.poster_path)
+            assertEquals(
+                dummyTv.vote_average.toString(),
+                tvEntities.vote_average.toString()
+            )
+           assertEquals(dummyTv.backdrop_path, tvEntities.backdrop_path)
+
+        }
+        viewModel.getDetailTV(tvId).observeForever(detailTvObserver)
+        verify(detailTvObserver).onChanged(dummyTv)
+        viewModel.getDetailTV(tvId).removeObserver(detailTvObserver)
     }
 
 

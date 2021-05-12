@@ -1,5 +1,6 @@
 package com.idm.moviedb.ui.movies.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.databinding.VerticalItemBinding
+import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.utils.Constant.Companion.IMAGE_PATH
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +38,11 @@ class MoviesListVerticalViewHolder(private val binding: VerticalItemBinding) :
                 .apply(RequestOptions())
                 .into(ivPoster)
 
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
+                itemView.context.startActivity(intent)
+            }
 
         }
 
