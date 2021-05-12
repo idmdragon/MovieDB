@@ -9,8 +9,6 @@ import com.idm.moviedb.data.response.movie.MovieResponse
 import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
-import com.idm.moviedb.data.response.search.SearchResponse
-import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.data.response.tv.TvResponse
 import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
@@ -59,21 +57,6 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
 
 
-    fun movieSearch(query: String): LiveData<ApiResponse<SearchResponse>>{
-        val searchItemList = MutableLiveData<ApiResponse<SearchResponse>>()
-        EspressoIdlingResource.increment()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = apiService.movieSearch(Constant.API_KEY, query)
-            if (response.isSuccessful) {
-                searchItemList.postValue(response.body()?.let { ApiResponse.success(it) })
-                EspressoIdlingResource.decrement()
-            } else {
-                searchItemList.postValue(
-                    response.body()?.let { ApiResponse.error(response.code().toString(), it) })
-            }
-        }
-        return searchItemList
-    }
 
     fun getTvPopular(): LiveData<ApiResponse<TvResponse>> {
         EspressoIdlingResource.increment()

@@ -4,7 +4,6 @@ import androidx.paging.DataSource
 import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
-import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.data.source.remote.ApiService
@@ -23,9 +22,6 @@ class LocalDataSource @Inject constructor(
     fun getNowPlaying() : DataSource.Factory<Int, MovieResult>  = movieDao.getNowPlaying()
     suspend fun insertNowPlayingMovies(listMovie: ArrayList<MovieResult>)= movieDao.insertListMovie(listMovie)
 
-    //Movie Search
-    fun getSearchMovie() : DataSource.Factory<Int, SearchResult>  = movieDao.getSearchMovie()
-    suspend fun insertSearchMovie(listMovie: ArrayList<SearchResult>)= movieDao.insertSearchMovie(listMovie)
 
     //TV Popular
     fun getTvPopular() : DataSource.Factory<Int, TvResult>  = tvDao.getTvPopular()

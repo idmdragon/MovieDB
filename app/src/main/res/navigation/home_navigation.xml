@@ -10,11 +10,6 @@
         android:label="fragment_movies"
         tools:layout="@layout/fragment_movies" />
     <fragment
-        android:id="@+id/search"
-        android:name="com.idm.moviedb.ui.search.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
-    <fragment
         android:id="@+id/tv"
         android:name="com.idm.moviedb.ui.tvshow.home.TvShowFragment"
         android:label="fragment_tv_show"

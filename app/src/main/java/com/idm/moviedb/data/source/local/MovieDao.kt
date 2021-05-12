@@ -7,7 +7,6 @@ import androidx.room.Dao
 import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.search.SearchResult
 
 @Dao
 interface MovieDao {
@@ -36,10 +35,6 @@ interface MovieDao {
     @Query("SELECT * FROM movie_item WHERE id = :id")
     fun getMovieItem(id: Int): LiveData<MovieDetailResponse>
 
-    @Query("SELECT * From search_list")
-    fun getSearchMovie(): DataSource.Factory<Int, SearchResult>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSearchMovie(items: ArrayList<SearchResult>)
 
 }

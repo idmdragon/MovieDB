@@ -9,10 +9,7 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_tv"
         android:title="" />
-    <item android:id="@+id/search"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_search_inactive"
-        android:title="" />
+
     <item
         android:id="@+id/favorite"
         android:icon="@drawable/ic_favorite"

@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase
 import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 
@@ -16,7 +15,6 @@ import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
         TvDetailResponse::class,
         MovieResult::class,
         TvResult::class,
-        SearchResult::class,
         MovieTopRated::class],
     version = 1
 )

@@ -11,8 +11,6 @@ import com.idm.moviedb.data.response.movie.MovieResult
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
-import com.idm.moviedb.data.response.search.SearchResponse
-import com.idm.moviedb.data.response.search.SearchResult
 import com.idm.moviedb.data.response.tv.TvResponse
 import com.idm.moviedb.data.response.tv.TvResult
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
@@ -32,46 +30,6 @@ class MainRepository @Inject constructor(
 
     companion object {
         const val TAG = "MainRepository"
-    }
-
-    override fun movieSearch(query: String): LiveData<Resource<PagedList<SearchResult>>> {
-            return object : NetworkBoundResource<PagedList<SearchResult>, SearchResponse>() {
-
-                val listSearchMovie = ArrayList<SearchResult>()
-                override fun loadFromDB(): LiveData<PagedList<SearchResult>> {
-                    val config = PagedList.Config.Builder()
-                        .setEnablePlaceholders(false)
-                        .setInitialLoadSizeHint(4)
-                        .setPageSize(4)
-                        .build()
-                    return LivePagedListBuilder(localDataSource.getSearchMovie(), config).build()
-                }
-
-                override fun shouldFetch(data: PagedList<SearchResult>?): Boolean =
-                    data == null || data.isEmpty()
-
-                public override fun createCall(): LiveData<ApiResponse<SearchResponse>> =
-                    remoteDataSource.movieSearch(query)
-
-                override fun saveCallResult(data: SearchResponse) {
-                    for (item in data.results){
-                        val searchItem = SearchResult(
-                            item.id,
-                            item.poster_path,
-                            item.release_date,
-                            item.title,
-                            item.vote_average
-
-                        )
-
-                        listSearchMovie.add(searchItem)
-                    }
-                    CoroutineScope(Dispatchers.IO).launch {
-                        localDataSource.insertSearchMovie(listSearchMovie)
-                    }
-                }
-            }.asLiveData()
-
     }
 
     override fun getTopRated(): LiveData<Resource<PagedList<MovieTopRated>>> {

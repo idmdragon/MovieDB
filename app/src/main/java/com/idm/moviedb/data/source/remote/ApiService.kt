@@ -2,9 +2,7 @@ package com.idm.moviedb.data.source.remote
 
 import com.idm.moviedb.data.response.movie.MovieResponse
 import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
 import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
-import com.idm.moviedb.data.response.search.SearchResponse
 import com.idm.moviedb.data.response.tv.TvResponse
 import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
 import retrofit2.Response
@@ -24,14 +22,6 @@ interface ApiService {
         @Query("api_key")
         api_key: String
     ): Response<MovieResponse>
-
-    @GET("/3/search/movie")
-    suspend fun movieSearch(
-        @Query("api_key")
-        api_key: String,
-        @Query("query")
-        query: String
-    ): Response<SearchResponse>
 
     @GET("/3/tv/popular")
     suspend fun getTvPopular(
