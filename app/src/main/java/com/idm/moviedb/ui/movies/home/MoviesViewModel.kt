@@ -9,11 +9,5 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-
-
-    fun getTopRated() = repository.getTopRated()
     fun getNowPlaying() = repository.getNowPlaying()
-
-
-
 }

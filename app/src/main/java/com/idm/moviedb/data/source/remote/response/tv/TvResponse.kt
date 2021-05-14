@@ -1,4 +1,4 @@
-package com.idm.moviedb.data.response.tv
+package com.idm.moviedb.data.source.remote.response.tv
 
 data class TvResponse(
     val results: ArrayList<TvResult>,

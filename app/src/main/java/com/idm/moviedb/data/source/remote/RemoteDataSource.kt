@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.idm.moviedb.data.repositories.MainRepository
-import com.idm.moviedb.data.response.movie.MovieResponse
-import com.idm.moviedb.data.response.movie.MovieResult
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
-import com.idm.moviedb.data.response.tv.TvResponse
-import com.idm.moviedb.data.response.tv.TvResult
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.remote.response.movie.MovieResponse
+import com.idm.moviedb.data.source.remote.response.movie.MovieResult
+import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.source.remote.response.tv.TvResponse
+import com.idm.moviedb.data.source.remote.response.tv.TvResult
+import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.utils.Constant
 import com.idm.moviedb.utils.EspressoIdlingResource
 import kotlinx.coroutines.CoroutineScope
@@ -22,21 +21,6 @@ import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
-
-    fun getTopRated(): LiveData<ApiResponse<MovieTopRatedResponse>> {
-        EspressoIdlingResource.increment()
-        val listTopRated = MutableLiveData<ApiResponse<MovieTopRatedResponse>>()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = apiService.getTopRated(Constant.API_KEY)
-            if (response.isSuccessful) {
-                listTopRated.postValue(response.body()?.let { ApiResponse.success(it) })
-                EspressoIdlingResource.decrement()
-            } else {
-                listTopRated.postValue(response.body()?.let { ApiResponse.error(response.code().toString(), it) })
-            }
-        }
-        return listTopRated
-    }
 
     fun getNowPlaying(): LiveData<ApiResponse<MovieResponse>> {
         EspressoIdlingResource.increment()
@@ -55,17 +39,14 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         return listNowPlaying
     }
 
-
-
-
     fun getTvPopular(): LiveData<ApiResponse<TvResponse>> {
         EspressoIdlingResource.increment()
         val listTvPopular = MutableLiveData<ApiResponse<TvResponse>>()
-
         CoroutineScope(Dispatchers.IO).launch {
             val response = apiService.getTvPopular(Constant.API_KEY)
             if (response.isSuccessful) {
                 listTvPopular.postValue(response.body()?.let { ApiResponse.success(it) })
+                EspressoIdlingResource.decrement()
 
             } else {
                 listTvPopular.postValue(
@@ -78,13 +59,12 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
     fun getDetailMovie(movie_id: Int): LiveData<ApiResponse<MovieDetailResponse>> {
         EspressoIdlingResource.increment()
         val detailMovie = MutableLiveData<ApiResponse<MovieDetailResponse>>()
-
         CoroutineScope(Dispatchers.IO).launch {
             val response = apiService.getDetailMovie(movie_id, Constant.API_KEY)
-
             if (response.isSuccessful) {
                 detailMovie.postValue(response.body()?.let { ApiResponse.success(it) })
                 EspressoIdlingResource.decrement()
+                Log.d("getDetailMovie","isi ${response.body()}")
             } else {
                 detailMovie.postValue(
                     response.body()?.let { ApiResponse.error(response.code().toString(), it) })
@@ -102,6 +82,8 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             if (response.isSuccessful) {
                 detailTv.postValue(response.body()?.let { ApiResponse.success(it) })
                 EspressoIdlingResource.decrement()
+                Log.d("getDetailTv", "isi ${response.body()}")
+
             } else {
                 detailTv.postValue(
                     response.body()?.let { ApiResponse.error(response.code().toString(), it) })

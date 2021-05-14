@@ -1,8 +1,8 @@
 package com.idm.moviedb.utils.dummyData
 
-import com.idm.moviedb.data.response.tv.TvResult
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.response.tv.detail.Genre
+import com.idm.moviedb.data.source.remote.response.tv.TvResult
+import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.remote.response.tv.detail.Genre
 object DummyTv {
     fun generateListTvShow(): ArrayList<TvResult> {
         val tvShow = ArrayList<TvResult>()
@@ -37,7 +37,8 @@ object DummyTv {
             poster_path = "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
             status="Ended",
             tagline="Honor the shield.",
-            vote_average=7.9
+            vote_average=7.9,
+            ""
         )
     }
 }

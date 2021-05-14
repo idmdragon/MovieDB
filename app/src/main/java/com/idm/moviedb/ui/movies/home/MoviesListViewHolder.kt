@@ -8,19 +8,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.idm.moviedb.data.response.movie.MovieResult
+import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.databinding.VerticalItemBinding
 import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.utils.Constant.Companion.IMAGE_PATH
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MoviesListVerticalViewHolder(private val binding: VerticalItemBinding) :
+class MoviesListViewHolder(private val binding: VerticalItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(movie: MovieResult) {
+    fun bind(movie: MovieEntity) {
         with(binding) {
             tvTittle.text = movie.title
-
             val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(movie.release_date)
             if (date != null) {
                 val formattedDatesString = SimpleDateFormat("MMM dd, yyyy", Locale.US).format(date)
@@ -43,8 +42,6 @@ class MoviesListVerticalViewHolder(private val binding: VerticalItemBinding) :
                 intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.id)
                 itemView.context.startActivity(intent)
             }
-
         }
-
     }
 }

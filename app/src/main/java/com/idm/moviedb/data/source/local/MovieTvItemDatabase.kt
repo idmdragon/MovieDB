@@ -2,20 +2,16 @@ package com.idm.moviedb.data.source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.idm.moviedb.data.response.movie.MovieResult
-import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.tv.TvResult
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+
+import com.idm.moviedb.data.source.local.dao.MovieDao
+import com.idm.moviedb.data.source.local.dao.TvDao
+import com.idm.moviedb.data.source.local.entity.MovieEntity
+import com.idm.moviedb.data.source.local.entity.TvEntity
 
 
 @Database(
     entities = [
-        MovieDetailResponse::class,
-        TvDetailResponse::class,
-        MovieResult::class,
-        TvResult::class,
-        MovieTopRated::class],
+    MovieEntity::class,TvEntity::class],
     version = 1
 )
 abstract class MovieTvItemDatabase : RoomDatabase() {

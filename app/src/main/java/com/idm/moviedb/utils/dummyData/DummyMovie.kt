@@ -1,8 +1,8 @@
 package com.idm.moviedb.utils.dummyData
 
-import com.idm.moviedb.data.response.movie.MovieResult
-import com.idm.moviedb.data.response.movie.detail.Genre
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.source.remote.response.movie.MovieResult
+import com.idm.moviedb.data.source.remote.response.movie.detail.Genres
+import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 
 object DummyMovie {
     fun generateTopMovie(): ArrayList<MovieResult> {
@@ -40,8 +40,8 @@ object DummyMovie {
             backdrop_path = "/xRI636TOdS1K1GBqIBRSmfZ1T5x.jpg",
             budget = 13200000,
             genres = listOf(
-                Genre("Comedy"), Genre("Drama"),
-                Genre("Romance")
+                Genres("Comedy"), Genres("Drama"),
+                Genres("Romance")
             ),
             id = 19404,
             original_language = "hi",
@@ -64,11 +64,11 @@ object DummyMovie {
             backdrop_path = "/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
             budget = 20000000,
             genres = listOf(
-                Genre("Fantasy"),
-                Genre("Action"),
-                Genre("Adventure"),
-                Genre("Science Fiction"),
-                Genre("Thriller")
+                Genres("Fantasy"),
+                Genres("Action"),
+                Genres("Adventure"),
+                Genres("Science Fiction"),
+                Genres("Thriller")
             ),
             id = 460465,
             original_language = "en",

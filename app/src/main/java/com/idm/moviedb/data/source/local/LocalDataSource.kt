@@ -1,43 +1,35 @@
 package com.idm.moviedb.data.source.local
 
 import androidx.paging.DataSource
-import com.idm.moviedb.data.response.movie.MovieResult
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.movie.toprated.MovieTopRated
-import com.idm.moviedb.data.response.tv.TvResult
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.source.remote.ApiService
+import com.idm.moviedb.data.source.local.dao.MovieDao
+import com.idm.moviedb.data.source.local.dao.TvDao
+import com.idm.moviedb.data.source.local.entity.MovieEntity
+import com.idm.moviedb.data.source.local.entity.TvEntity
 import javax.inject.Inject
 class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao,
     private val tvDao: TvDao,
         ){
 
-    //Movie TopRated
-    fun getTopRated() : DataSource.Factory<Int, MovieTopRated> = movieDao.getTopRated()
-    suspend fun insertTopRatedMovies(listMovie: ArrayList<MovieTopRated>)= movieDao.insertListMovieTopRated(listMovie)
 
-
-    //Movie Now Playing
-    fun getNowPlaying() : DataSource.Factory<Int, MovieResult>  = movieDao.getNowPlaying()
-    suspend fun insertNowPlayingMovies(listMovie: ArrayList<MovieResult>)= movieDao.insertListMovie(listMovie)
-
-
-    //TV Popular
-    fun getTvPopular() : DataSource.Factory<Int, TvResult>  = tvDao.getTvPopular()
-    suspend fun insertTvPopular(listTv: ArrayList<TvResult>)= tvDao.insertListTv(listTv)
-
-    //Favorite Movie
-    suspend fun insertFavoriteMovie(movie: MovieDetailResponse) = movieDao.insertFavoriteMovie(movie)
-    suspend fun deleteMovie(movie: MovieDetailResponse) = movieDao.deleteMovie(movie)
+    fun getMovieList() : DataSource.Factory<Int, MovieEntity>  = movieDao.getMovieList()
+    suspend fun insertMovieList(listMovie: ArrayList<MovieEntity>)= movieDao.insertListMovie(listMovie)
+    suspend fun updateMovie(movie: MovieEntity) {
+        movie.favorite = !movie.favorite
+        movieDao.updateMovie(movie)
+    }
     fun getAllFavoriteMovieItems() = movieDao.getFavoritesAllMovieItems()
-    fun getMovieItem(id: Int) = movieDao.getMovieItem(id)
+    fun getDetailTv(tvId : Int) = tvDao.getDetailTv(tvId)
 
 
-    //Favorite Tv
-    suspend fun insertTv(tv: TvDetailResponse) = tvDao.insertFavoriteTv(tv)
-    suspend fun deleteTv(tv: TvDetailResponse) = tvDao.deleteTv(tv)
+    suspend fun insertTvList(listTv: ArrayList<TvEntity>)= tvDao.insertListTv(listTv)
+    fun getTvList() : DataSource.Factory<Int, TvEntity>  = tvDao.getTvList()
+    fun getDetailMovie(movieId : Int) = movieDao.getDetailMovie(movieId)
+    suspend fun updateTv(tv: TvEntity) {
+        tv.favorite = !tv.favorite
+        tvDao.updateTv(tv)
+    }
     fun getAllFavoriteTVItems() = tvDao.getAllFavoriteTvItems()
-    fun getTvItem(id: Int) = tvDao.getTvItem(id)
+
 
 }

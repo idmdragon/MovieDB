@@ -1,21 +1,16 @@
 package com.idm.moviedb.data.source.remote
 
-import com.idm.moviedb.data.response.movie.MovieResponse
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.response.movie.toprated.MovieTopRatedResponse
-import com.idm.moviedb.data.response.tv.TvResponse
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.remote.response.movie.MovieResponse
+import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.source.remote.response.tv.TvResponse
+import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/3/movie/top_rated")
-    suspend fun getTopRated(
-        @Query("api_key")
-        api_key: String
-    ): Response<MovieTopRatedResponse>
+
 
     @GET("/3/movie/now_playing")
     suspend fun getNowPlaying(

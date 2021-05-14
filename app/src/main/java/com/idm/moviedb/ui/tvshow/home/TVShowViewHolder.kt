@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.idm.moviedb.data.response.tv.TvResult
+import com.idm.moviedb.data.source.local.entity.TvEntity
+import com.idm.moviedb.data.source.remote.response.tv.TvResult
 import com.idm.moviedb.databinding.VerticalItemBinding
 import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
@@ -17,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class TVShowViewHolder(private val binding: VerticalItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: TvResult) {
+    fun bind(item: TvEntity) {
         with(binding) {
 
             val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(item.first_air_date)

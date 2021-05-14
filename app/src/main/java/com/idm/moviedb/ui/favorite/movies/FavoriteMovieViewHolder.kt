@@ -8,14 +8,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
+import com.idm.moviedb.data.source.local.entity.MovieEntity
+import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.databinding.FavoriteItemListBinding
 import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.utils.Constant
 
 class FavoriteMovieViewHolder (private val binding: FavoriteItemListBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(movie: MovieDetailResponse) {
+    fun bind(movie: MovieEntity) {
         with(binding) {
             tvTittle.text = movie.title
             val rate: Double = movie.vote_average / 2

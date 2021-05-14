@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,10 +14,10 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.snackbar.Snackbar
 import com.idm.moviedb.R
+import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
-import com.idm.moviedb.data.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.source.remote.StatusResponse
 import com.idm.moviedb.utils.Constant
+
 import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +27,7 @@ import java.text.NumberFormat
 import java.util.*
 
 @AndroidEntryPoint
-class DetailMovieActivity : AppCompatActivity() {
+class DetailMovieActivity : AppCompatActivity(){
     companion object {
         const val MOVIE_ID = "movie_id"
     }
@@ -41,23 +42,23 @@ class DetailMovieActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val movieID = intent.getIntExtra(MOVIE_ID, 0)
-
-
-        detailMovieViewModel.getMovieItem(movieID).observe(this, {
-            if (it != null) {
-                favState = true
-                stateFavoriteIcon(true)
-            }
-        })
+        Log.d("DETAILMOVIE","MOVIEID $movieID")
 
         detailMovieViewModel.getDetailMovie(movieID).observe(this,{
+            Log.d("DETAILMOVIE","${it.status}")
             when (it.status) {
-                StatusResponse.EMPTY -> {
+                Status.LOADING  -> {
+                    binding.progressBar.isVisible = true
                 }
-                StatusResponse.SUCCESS -> {
-                    bindData(it.body)
+                Status.SUCCESS -> {
+                    it.data?.let { it1 -> bindData(it1) }
+                    Log.d("DETAILMOVIEACTIVITY","ISI ${it.data}")
+
+                    binding.progressBar.isVisible = false
                 }
-                StatusResponse.ERROR -> {
+                Status.ERROR -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(this@DetailMovieActivity,"Error when Load a Data", Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -70,22 +71,17 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
 
-    private fun bindData(movie: MovieDetailResponse) {
-
+    private fun bindData(movie: MovieEntity) {
         binding.btnSave.setOnClickListener {
-
+            CoroutineScope(Dispatchers.IO).launch {
+                detailMovieViewModel.updateMovie(movie)
+            }
             if (favState == false) {
                 stateFavoriteIcon(true)
                 favState = true
-                CoroutineScope(Dispatchers.IO).launch {
-                    detailMovieViewModel.insertMovie(movie)
-                }
                 Snackbar.make(it, "Movie Saved to Favorite", Snackbar.LENGTH_SHORT).show()
             } else if (favState == true) {
                 favState = false
-                CoroutineScope(Dispatchers.IO).launch {
-                    detailMovieViewModel.deleteMovie(movie)
-                }
                 Snackbar.make(it, "Movie Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
                 stateFavoriteIcon(false)
             }
@@ -96,7 +92,6 @@ class DetailMovieActivity : AppCompatActivity() {
         with(binding) {
             Log.d("Detail", "Isi Detail $movie")
             tvTittle.text = movie.title
-            progressBar.isVisible = false
             val tagline = if (movie.tagline.isEmpty()) {
                 "Tagline Not Found"
             } else {
@@ -122,6 +117,9 @@ class DetailMovieActivity : AppCompatActivity() {
 
             val star = movie.vote_average
             tvStar.text = star.toString()
+
+            Log.d("IMAGEPATHDETAILMOVIE",Constant.IMAGE_PATH + movie.poster_path)
+
             Glide.with(this@DetailMovieActivity)
                 .load(Constant.IMAGE_PATH + movie.poster_path)
                 .transform(CenterCrop(), RoundedCorners(16))

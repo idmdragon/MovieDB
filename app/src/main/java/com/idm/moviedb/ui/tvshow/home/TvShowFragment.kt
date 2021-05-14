@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.databinding.FragmentTvShowBinding
-import com.idm.moviedb.data.response.tv.TvResult
-import com.idm.moviedb.ui.movies.home.MoviePagedListAdapterHorizontal
-import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
+import com.idm.moviedb.data.source.remote.response.tv.TvResult
 import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,7 +54,7 @@ class TvShowFragment : Fragment() {
         }
     }
 
-    private fun setTvShow(items: PagedList<TvResult>) {
+    private fun setTvShow(items: PagedList<TvEntity>) {
         adapter = TvPagedListAdapter()
         adapter.submitList(items)
         binding.rvTvshow.adapter = adapter

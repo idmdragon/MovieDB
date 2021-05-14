@@ -1,4 +1,4 @@
-package com.idm.moviedb.data.response.movie
+package com.idm.moviedb.data.source.remote.response.movie
 
 
 data class MovieResponse(

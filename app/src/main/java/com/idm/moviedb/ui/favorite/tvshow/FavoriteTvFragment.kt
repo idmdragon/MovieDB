@@ -10,7 +10,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.local.entity.TvEntity
+import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.databinding.FragmentFavoriteTvBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,7 @@ class FavoriteTvFragment : Fragment() {
 
     }
 
-    private fun setFavoriteList(items: PagedList<TvDetailResponse>) {
+    private fun setFavoriteList(items: PagedList<TvEntity>) {
         Log.d("FavoriteMoviesFragment", "Isi $items")
 
         if (items.isEmpty()){

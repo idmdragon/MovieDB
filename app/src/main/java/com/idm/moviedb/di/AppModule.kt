@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.viewbinding.BuildConfig
 import com.idm.moviedb.BaseApplication
-import com.idm.moviedb.data.source.local.MovieDao
+import com.idm.moviedb.data.source.local.dao.MovieDao
 import com.idm.moviedb.data.source.local.MovieTvItemDatabase
-import com.idm.moviedb.data.source.local.TvDao
+import com.idm.moviedb.data.source.local.dao.TvDao
 import com.idm.moviedb.data.source.remote.ApiService
 import com.idm.moviedb.utils.Constant
 import com.idm.moviedb.utils.Constant.Companion.DATABASE_NAME

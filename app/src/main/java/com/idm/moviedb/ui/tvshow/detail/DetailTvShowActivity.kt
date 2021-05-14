@@ -3,6 +3,7 @@ package com.idm.moviedb.ui.tvshow.detail
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.snackbar.Snackbar
 import com.idm.moviedb.R
+import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
-import com.idm.moviedb.data.response.tv.detail.TvDetailResponse
+import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.data.source.remote.StatusResponse
 import com.idm.moviedb.utils.Constant
+import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,23 +44,21 @@ class DetailTvShowActivity : AppCompatActivity() {
         val tvId = intent.getIntExtra(TV_ID, 0)
         detailTvShowViewModel.getDetailTV(tvId).observe(this, {
             when (it.status) {
-                StatusResponse.EMPTY -> {
+                Status.LOADING  -> {
+                    binding.progressBar.isVisible = true
                 }
-                StatusResponse.SUCCESS -> {
-                    bindData(it.body)
+                Status.SUCCESS -> {
+                    it.data?.let { it1 -> bindData(it1) }
+                    binding.progressBar.isVisible = false
                 }
-                StatusResponse.ERROR -> {
+                Status.ERROR -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(this@DetailTvShowActivity,"Error when Load a Data", Toast.LENGTH_LONG).show()
                 }
             }
         })
 
 
-        detailTvShowViewModel.getTvItem(tvId).observe(this, {
-            if (it != null) {
-                favState = true
-                stateFavoriteIcon(true)
-            }
-        })
 
         binding.btnBack.setOnClickListener {
             finish()
@@ -65,29 +66,24 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     }
 
-    private fun bindData(tvShow: TvDetailResponse) {
-
+    private fun bindData(tvShow: TvEntity) {
         binding.btnSave.setOnClickListener {
             if (favState == false) {
                 favState = true
                 stateFavoriteIcon(true)
-                CoroutineScope(Dispatchers.IO).launch {
-                    detailTvShowViewModel.insertTv(tvShow)
-                }
                 Snackbar.make(it, "TV Show Saved to Favorite", Snackbar.LENGTH_SHORT).show()
             } else if (favState == true) {
                 stateFavoriteIcon(false)
                 favState = false
-                CoroutineScope(Dispatchers.IO).launch {
-                    detailTvShowViewModel.deleteTv(tvShow)
-                }
                 Snackbar.make(it, "TV Show Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
             }
-
+            CoroutineScope(Dispatchers.IO).launch {
+                detailTvShowViewModel.updateTv(tvShow)
+            }
         }
 
         with(binding) {
-            progressBar.isVisible = false
+
             val listGenre = tvShow.genres.map {
                 it.name
             }

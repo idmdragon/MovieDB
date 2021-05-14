@@ -1,9 +1,8 @@
-package com.idm.moviedb.data.response.tv
+package com.idm.moviedb.data.source.remote.response.tv
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tv_list")
 data class TvResult(
     val backdrop_path: String,
     val first_air_date: String,
