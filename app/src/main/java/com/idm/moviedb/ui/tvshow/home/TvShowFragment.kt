@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,11 +42,20 @@ class TvShowFragment : Fragment() {
             tvShowViewModel.getTvPopular().observe(viewLifecycleOwner,{
                 when (it.status) {
                     Status.LOADING -> {
+                        binding.shimmerTopTV.startShimmer()
+                        binding.shimmerTopTV.visibility = View.VISIBLE
                     }
+
                     Status.SUCCESS -> {
                         it.data?.let { it1 -> setTvShow(it1) }
+                        binding.shimmerTopTV.stopShimmer()
+                        binding.shimmerTopTV.visibility = View.GONE
+                        binding.rvTvshow.visibility = View.VISIBLE
                     }
                     Status.ERROR -> {
+                        binding.shimmerTopTV.stopShimmer()
+                        binding.shimmerTopTV.visibility = View.GONE
+                        Toast.makeText(requireContext(),"Error when Load a Data", Toast.LENGTH_LONG).show()
                     }
                 }
             })
@@ -59,9 +69,8 @@ class TvShowFragment : Fragment() {
         adapter.submitList(items)
         binding.rvTvshow.adapter = adapter
         adapter.notifyDataSetChanged()
-        binding.rvTvshow.visibility = View.VISIBLE
-        binding.shimmerTopTV.stopShimmer()
-        binding.shimmerTopTV.visibility = View.GONE
+
+
 
     }
 

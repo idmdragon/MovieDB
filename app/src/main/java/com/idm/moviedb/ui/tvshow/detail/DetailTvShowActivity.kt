@@ -34,7 +34,6 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTvshowBinding
     private val detailTvShowViewModel: DetailTvShowViewModel by viewModels()
-    private var favState = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +49,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                 Status.SUCCESS -> {
                     it.data?.let { it1 -> bindData(it1) }
                     binding.progressBar.isVisible = false
+
                 }
                 Status.ERROR -> {
                     binding.progressBar.isVisible = false
@@ -67,14 +67,11 @@ class DetailTvShowActivity : AppCompatActivity() {
     }
 
     private fun bindData(tvShow: TvEntity) {
+        stateFavoriteIcon(tvShow.favorite)
         binding.btnSave.setOnClickListener {
-            if (favState == false) {
-                favState = true
-                stateFavoriteIcon(true)
+            if (tvShow.favorite == false) {
                 Snackbar.make(it, "TV Show Saved to Favorite", Snackbar.LENGTH_SHORT).show()
-            } else if (favState == true) {
-                stateFavoriteIcon(false)
-                favState = false
+            } else if (tvShow.favorite == true) {
                 Snackbar.make(it, "TV Show Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
             }
             CoroutineScope(Dispatchers.IO).launch {

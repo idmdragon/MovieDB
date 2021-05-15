@@ -14,8 +14,8 @@ interface TvDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertListTv(movie: ArrayList<TvEntity>)
 
-    @Update
-    suspend fun updateTv(tv: TvEntity)
+    @Update(entity = TvEntity::class)
+    fun updateTv(tv: TvEntity)
 
     @Query("SELECT * from tv_list where favorite = 1 ")
     fun getAllFavoriteTvItems(): DataSource.Factory<Int, TvEntity>

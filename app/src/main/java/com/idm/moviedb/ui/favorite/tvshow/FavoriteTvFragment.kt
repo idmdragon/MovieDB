@@ -10,9 +10,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.databinding.FragmentFavoriteTvBinding
+import com.idm.moviedb.ui.favorite.movies.FavoriteMoviePagedListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -33,28 +35,21 @@ class FavoriteTvFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        favoriteAdapter = FavoriteTvPagedListAdapter()
+        favoriteAdapter.notifyDataSetChanged()
+        binding.rvFavTv.layoutManager = LinearLayoutManager(requireContext())
         viewModel.getAllTvMovie().observe(viewLifecycleOwner, ::setFavoriteList)
-
     }
 
     private fun setFavoriteList(items: PagedList<TvEntity>) {
-        Log.d("FavoriteMoviesFragment", "Isi $items")
-
-        if (items.isEmpty()){
+        if (items.isEmpty()) {
             binding.tvNotfound.isVisible = true
-        }else{
-            binding.tvNotfound.isVisible = false
-            favoriteAdapter = FavoriteTvPagedListAdapter()
             favoriteAdapter.submitList(items)
-            favoriteAdapter.notifyDataSetChanged()
-            binding.rvFavTv.layoutManager = LinearLayoutManager(
-                activity,
-                LinearLayoutManager.VERTICAL, false
-            )
-            binding.rvFavTv.adapter = favoriteAdapter
-
+        } else {
+            binding.tvNotfound.isVisible = false
+            favoriteAdapter.submitList(items)
         }
-
+        binding.rvFavTv.adapter = favoriteAdapter
     }
 
     override fun onDestroy() {

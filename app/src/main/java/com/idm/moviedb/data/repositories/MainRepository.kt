@@ -30,9 +30,7 @@ class MainRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) : MovieTvDataSource {
 
-    companion object {
-        const val TAG = "MainRepository"
-    }
+
 
     override fun getNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object : NetworkBoundResource<PagedList<MovieEntity>, MovieResponse>() {

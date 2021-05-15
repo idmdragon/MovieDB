@@ -5,6 +5,7 @@ import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.Dao
 import com.idm.moviedb.data.source.local.entity.MovieEntity
+import com.idm.moviedb.data.source.local.entity.TvEntity
 
 @Dao
 interface MovieDao {
@@ -14,8 +15,8 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertListMovie(movie: ArrayList<MovieEntity>)
 
-    @Update
-    suspend fun updateMovie(movie: MovieEntity)
+    @Update(entity = MovieEntity::class)
+    fun updateMovie(movie: MovieEntity)
 
     @Query("SELECT * from movie_list  where favorite = 1 ")
     fun getFavoritesAllMovieItems():  DataSource.Factory<Int, MovieEntity>

@@ -34,7 +34,6 @@ class DetailMovieActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityDetailMovieBinding
     private val detailMovieViewModel: DetailMovieViewModel by viewModels()
-    private var favState = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,20 +71,17 @@ class DetailMovieActivity : AppCompatActivity(){
 
 
     private fun bindData(movie: MovieEntity) {
+        stateFavoriteIcon(movie.favorite)
+
         binding.btnSave.setOnClickListener {
+            if (movie.favorite == false) {
+                Snackbar.make(it, "Movie Saved to Favorite", Snackbar.LENGTH_SHORT).show()
+            } else if (movie.favorite == true) {
+                Snackbar.make(it, "Movie Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
+            }
             CoroutineScope(Dispatchers.IO).launch {
                 detailMovieViewModel.updateMovie(movie)
             }
-            if (favState == false) {
-                stateFavoriteIcon(true)
-                favState = true
-                Snackbar.make(it, "Movie Saved to Favorite", Snackbar.LENGTH_SHORT).show()
-            } else if (favState == true) {
-                favState = false
-                Snackbar.make(it, "Movie Deleted from Favorite", Snackbar.LENGTH_SHORT).show()
-                stateFavoriteIcon(false)
-            }
-
         }
 
         //getMovieItem

@@ -14,21 +14,25 @@ class LocalDataSource @Inject constructor(
 
     fun getMovieList() : DataSource.Factory<Int, MovieEntity>  = movieDao.getMovieList()
     suspend fun insertMovieList(listMovie: ArrayList<MovieEntity>)= movieDao.insertListMovie(listMovie)
-    suspend fun updateMovie(movie: MovieEntity) {
+
+    fun updateMovie(movie: MovieEntity) {
         movie.favorite = !movie.favorite
         movieDao.updateMovie(movie)
     }
-    fun getAllFavoriteMovieItems() = movieDao.getFavoritesAllMovieItems()
+    fun getAllFavoriteMovieItems(): DataSource.Factory<Int, MovieEntity> = movieDao.getFavoritesAllMovieItems()
+
     fun getDetailTv(tvId : Int) = tvDao.getDetailTv(tvId)
 
 
     suspend fun insertTvList(listTv: ArrayList<TvEntity>)= tvDao.insertListTv(listTv)
     fun getTvList() : DataSource.Factory<Int, TvEntity>  = tvDao.getTvList()
     fun getDetailMovie(movieId : Int) = movieDao.getDetailMovie(movieId)
-    suspend fun updateTv(tv: TvEntity) {
+
+    fun updateTv(tv: TvEntity) {
         tv.favorite = !tv.favorite
         tvDao.updateTv(tv)
     }
+
     fun getAllFavoriteTVItems() = tvDao.getAllFavoriteTvItems()
 
 

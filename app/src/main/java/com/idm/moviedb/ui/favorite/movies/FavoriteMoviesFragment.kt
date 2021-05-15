@@ -33,27 +33,22 @@ class FavoriteMoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        favoriteAdapter = FavoriteMoviePagedListAdapter()
+        favoriteAdapter.notifyDataSetChanged()
+        binding.rvFavMovie.layoutManager = LinearLayoutManager(requireContext())
         viewModel.getAllFavoriteMovie().observe(viewLifecycleOwner, ::setFavoriteList)
-
 
     }
 
     private fun setFavoriteList(items: PagedList<MovieEntity>) {
-
         if (items.isEmpty()) {
             binding.movieNotfound.isVisible = true
+            favoriteAdapter.submitList(items)
         } else {
             binding.movieNotfound.isVisible = false
-            favoriteAdapter = FavoriteMoviePagedListAdapter()
             favoriteAdapter.submitList(items)
-            favoriteAdapter.notifyDataSetChanged()
-            binding.rvFavMovie.layoutManager = LinearLayoutManager(
-                activity,
-                LinearLayoutManager.VERTICAL, false
-            )
-            binding.rvFavMovie.adapter = favoriteAdapter
         }
-
+        binding.rvFavMovie.adapter = favoriteAdapter
     }
 
 
