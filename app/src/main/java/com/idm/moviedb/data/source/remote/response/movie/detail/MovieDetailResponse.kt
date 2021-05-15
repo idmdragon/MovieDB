@@ -1,7 +1,5 @@
 package com.idm.moviedb.data.source.remote.response.movie.detail
 
-
-
 data class MovieDetailResponse(
     val backdrop_path: String ="",
     val budget: Int= 0,

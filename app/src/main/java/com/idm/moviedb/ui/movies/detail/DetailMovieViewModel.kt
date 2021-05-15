@@ -1,7 +1,6 @@
 package com.idm.moviedb.ui.movies.detail
 
 import androidx.lifecycle.ViewModel
-import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.repositories.MainRepository
 import com.idm.moviedb.data.source.local.entity.MovieEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +12,7 @@ class DetailMovieViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getDetailMovie(id : Int) = repository.getDetailMovie(id)
-    suspend fun updateMovie(movie: MovieEntity) = repository.updateMovie(movie)
+    fun updateMovie(movie: MovieEntity) = repository.updateMovie(movie)
 
     }
 

@@ -16,8 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.idm.moviedb.R
 import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.databinding.ActivityDetailTvshowBinding
-import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
-import com.idm.moviedb.data.source.remote.StatusResponse
 import com.idm.moviedb.utils.Constant
 import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint

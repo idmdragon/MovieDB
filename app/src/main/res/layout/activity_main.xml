@@ -15,7 +15,8 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_moviedb"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"

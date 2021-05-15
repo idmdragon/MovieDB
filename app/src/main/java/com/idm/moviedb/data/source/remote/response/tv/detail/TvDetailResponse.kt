@@ -1,6 +1,5 @@
 package com.idm.moviedb.data.source.remote.response.tv.detail
 
-
 data class TvDetailResponse(
     val backdrop_path: String = "",
     val genres: List<Genre>,

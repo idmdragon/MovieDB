@@ -5,7 +5,6 @@ import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.Dao
 import com.idm.moviedb.data.source.local.entity.MovieEntity
-import com.idm.moviedb.data.source.local.entity.TvEntity
 
 @Dao
 interface MovieDao {

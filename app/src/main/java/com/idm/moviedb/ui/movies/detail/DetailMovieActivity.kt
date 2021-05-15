@@ -17,7 +17,6 @@ import com.idm.moviedb.R
 import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.databinding.ActivityDetailMovieBinding
 import com.idm.moviedb.utils.Constant
-
 import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -41,18 +40,14 @@ class DetailMovieActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         val movieID = intent.getIntExtra(MOVIE_ID, 0)
-        Log.d("DETAILMOVIE","MOVIEID $movieID")
 
         detailMovieViewModel.getDetailMovie(movieID).observe(this,{
-            Log.d("DETAILMOVIE","${it.status}")
             when (it.status) {
                 Status.LOADING  -> {
                     binding.progressBar.isVisible = true
                 }
                 Status.SUCCESS -> {
                     it.data?.let { it1 -> bindData(it1) }
-                    Log.d("DETAILMOVIEACTIVITY","ISI ${it.data}")
-
                     binding.progressBar.isVisible = false
                 }
                 Status.ERROR -> {
@@ -114,15 +109,11 @@ class DetailMovieActivity : AppCompatActivity(){
             val star = movie.vote_average
             tvStar.text = star.toString()
 
-            Log.d("IMAGEPATHDETAILMOVIE",Constant.IMAGE_PATH + movie.poster_path)
-
             Glide.with(this@DetailMovieActivity)
                 .load(Constant.IMAGE_PATH + movie.poster_path)
                 .transform(CenterCrop(), RoundedCorners(16))
                 .placeholder(ColorDrawable(Color.GRAY))
                 .into(ivPoster)
-
-
         }
     }
 

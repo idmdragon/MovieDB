@@ -1,8 +1,6 @@
 package com.idm.moviedb.ui.tvshow.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,6 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.databinding.FragmentTvShowBinding
-import com.idm.moviedb.data.source.remote.response.tv.TvResult
 import com.idm.moviedb.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +36,7 @@ class TvShowFragment : Fragment() {
         binding.rvTvshow.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         activity.apply {
-            tvShowViewModel.getTvPopular().observe(viewLifecycleOwner,{
+            tvShowViewModel.getTvPopular().observe(viewLifecycleOwner, {
                 when (it.status) {
                     Status.LOADING -> {
                         binding.shimmerTopTV.startShimmer()
@@ -55,7 +52,11 @@ class TvShowFragment : Fragment() {
                     Status.ERROR -> {
                         binding.shimmerTopTV.stopShimmer()
                         binding.shimmerTopTV.visibility = View.GONE
-                        Toast.makeText(requireContext(),"Error when Load a Data", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error when Load a Data",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             })
@@ -69,7 +70,6 @@ class TvShowFragment : Fragment() {
         adapter.submitList(items)
         binding.rvTvshow.adapter = adapter
         adapter.notifyDataSetChanged()
-
 
 
     }

@@ -9,7 +9,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.data.source.local.entity.MovieEntity
-import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.databinding.FavoriteItemListBinding
 import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.utils.Constant

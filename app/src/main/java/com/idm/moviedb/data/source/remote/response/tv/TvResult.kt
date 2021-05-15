@@ -1,6 +1,5 @@
 package com.idm.moviedb.data.source.remote.response.tv
 
-import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 data class TvResult(

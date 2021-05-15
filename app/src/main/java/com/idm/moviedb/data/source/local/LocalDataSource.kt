@@ -6,6 +6,7 @@ import com.idm.moviedb.data.source.local.dao.TvDao
 import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.data.source.local.entity.TvEntity
 import javax.inject.Inject
+
 class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao,
     private val tvDao: TvDao,
@@ -13,6 +14,7 @@ class LocalDataSource @Inject constructor(
 
 
     fun getMovieList() : DataSource.Factory<Int, MovieEntity>  = movieDao.getMovieList()
+
     suspend fun insertMovieList(listMovie: ArrayList<MovieEntity>)= movieDao.insertListMovie(listMovie)
 
     fun updateMovie(movie: MovieEntity) {

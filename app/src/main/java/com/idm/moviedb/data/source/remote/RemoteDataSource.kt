@@ -3,13 +3,9 @@ package com.idm.moviedb.data.source.remote
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.DataSource
-import com.idm.moviedb.data.repositories.MainRepository
 import com.idm.moviedb.data.source.remote.response.movie.MovieResponse
-import com.idm.moviedb.data.source.remote.response.movie.MovieResult
 import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.data.source.remote.response.tv.TvResponse
-import com.idm.moviedb.data.source.remote.response.tv.TvResult
 import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.utils.Constant
 import com.idm.moviedb.utils.EspressoIdlingResource

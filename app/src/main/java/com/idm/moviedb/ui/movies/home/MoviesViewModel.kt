@@ -9,5 +9,5 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-    fun getNowPlaying() = repository.getNowPlaying()
+    fun getNowPlaying() = repository.getMovieList()
 }

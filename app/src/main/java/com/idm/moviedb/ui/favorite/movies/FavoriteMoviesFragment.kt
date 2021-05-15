@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.data.source.local.entity.MovieEntity
-import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
 import com.idm.moviedb.databinding.FragmentFavoriteMoviesBinding
 import dagger.hilt.android.AndroidEntryPoint
 

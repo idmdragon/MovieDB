@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idm.moviedb.databinding.FragmentMoviesBinding
 import com.idm.moviedb.vo.Status
@@ -38,7 +37,6 @@ class MoviesFragment : Fragment() {
             moviesViewModel.getNowPlaying().observe(viewLifecycleOwner,{
                 when (it.status) {
                     Status.LOADING -> {
-                        binding.shimmerNowPlaying.startShimmer()
                     }
                     Status.SUCCESS -> {
                         it.data?.let { item ->

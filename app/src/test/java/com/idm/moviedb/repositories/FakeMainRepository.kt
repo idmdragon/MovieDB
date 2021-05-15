@@ -1,33 +1,35 @@
-package com.idm.moviedb.data.repositories
+package com.idm.moviedb.repositories
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.idm.moviedb.data.NetworkBoundResource
-import com.idm.moviedb.data.source.remote.response.movie.MovieResponse
+import com.idm.moviedb.data.repositories.MovieTvDataSource
 import com.idm.moviedb.data.source.remote.response.movie.detail.MovieDetailResponse
-import com.idm.moviedb.data.source.remote.response.tv.TvResponse
 import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.data.source.local.LocalDataSource
 import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.data.source.local.entity.TvEntity
 import com.idm.moviedb.data.source.remote.ApiResponse
 import com.idm.moviedb.data.source.remote.RemoteDataSource
+import com.idm.moviedb.data.source.remote.response.movie.MovieResponse
 import com.idm.moviedb.data.source.remote.response.movie.detail.Genres
+import com.idm.moviedb.data.source.remote.response.tv.TvResponse
 import com.idm.moviedb.data.source.remote.response.tv.detail.Genre
 import com.idm.moviedb.utils.AppExecutors
 import com.idm.moviedb.vo.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MainRepository @Inject constructor(
+
+class FakeMainRepository constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
-) : MovieTvDataSource {
+    private val appExecutors : AppExecutors
+): MovieTvDataSource {
+
 
     override fun getMovieList(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object : NetworkBoundResource<PagedList<MovieEntity>, MovieResponse>() {
@@ -99,7 +101,7 @@ class MainRepository @Inject constructor(
             override fun saveCallResult(data: TvResponse) {
                 for (item in data.results) {
                     val tvitem = TvEntity(
-                       item.backdrop_path,
+                        item.backdrop_path,
                         genres = listOf(
                             Genre(""),
                         ),
@@ -196,8 +198,8 @@ class MainRepository @Inject constructor(
                     data.first_air_date,
                     false
                 )
-               listTvItem.add(tvitem)
-               Log.d("GetDetailRepo","isi Tvitem $tvitem")
+                listTvItem.add(tvitem)
+                Log.d("GetDetailRepo","isi Tvitem $tvitem")
                 CoroutineScope(Dispatchers.IO).launch {
                     localDataSource.insertTvList(listTvItem)
                 }
@@ -232,4 +234,3 @@ class MainRepository @Inject constructor(
         return LivePagedListBuilder(localDataSource.getAllFavoriteTVItems(), config).build()
     }
 }
-

@@ -8,6 +8,7 @@ import com.idm.moviedb.data.source.local.dao.MovieDao
 import com.idm.moviedb.data.source.local.MovieTvItemDatabase
 import com.idm.moviedb.data.source.local.dao.TvDao
 import com.idm.moviedb.data.source.remote.ApiService
+import com.idm.moviedb.utils.AppExecutors
 import com.idm.moviedb.utils.Constant
 import com.idm.moviedb.utils.Constant.Companion.DATABASE_NAME
 import dagger.Module
@@ -35,6 +36,8 @@ object AppModule {
     @Provides
     fun provideBaseUrl() = Constant.BASE_URL
 
+    @Provides
+    fun appExecutors() = AppExecutors()
 
     @Singleton
     @Provides

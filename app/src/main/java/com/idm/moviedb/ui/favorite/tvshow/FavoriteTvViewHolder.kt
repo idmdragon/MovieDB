@@ -9,7 +9,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.data.source.local.entity.TvEntity
-import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.databinding.FavoriteItemListBinding
 import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
 import com.idm.moviedb.utils.Constant

@@ -15,7 +15,8 @@
         android:layout_height="164dp"
         tools:background="@color/gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/poster" />
 
     <TextView
         android:id="@+id/tv_tittle"

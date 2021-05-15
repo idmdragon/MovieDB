@@ -1,7 +1,6 @@
 package com.idm.moviedb.ui.favorite.tvshow
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.idm.moviedb.data.source.local.entity.MovieEntity
 import com.idm.moviedb.data.source.local.entity.TvEntity
-import com.idm.moviedb.data.source.remote.response.tv.detail.TvDetailResponse
 import com.idm.moviedb.databinding.FragmentFavoriteTvBinding
-import com.idm.moviedb.ui.favorite.movies.FavoriteMoviePagedListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 

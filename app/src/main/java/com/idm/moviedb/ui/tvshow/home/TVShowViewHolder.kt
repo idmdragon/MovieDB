@@ -9,9 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.idm.moviedb.data.source.local.entity.TvEntity
-import com.idm.moviedb.data.source.remote.response.tv.TvResult
 import com.idm.moviedb.databinding.VerticalItemBinding
-import com.idm.moviedb.ui.movies.detail.DetailMovieActivity
 import com.idm.moviedb.ui.tvshow.detail.DetailTvShowActivity
 import com.idm.moviedb.utils.Constant
 import java.text.SimpleDateFormat
